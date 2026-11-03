@@ -1,0 +1,1407 @@
+[
+ {
+  "key": "resnet",
+  "arxiv": "1512.03385",
+  "title": "Deep Residual Learning for Image Recognition",
+  "authors": [
+   "Kaiming He",
+   "Xiangyu Zhang",
+   "Shaoqing Ren",
+   "Jian Sun"
+  ],
+  "year": 2015,
+  "published": "2015-12-10",
+  "file": "1512.03385_resnet.pdf",
+  "summary": "Deeper neural networks are more difficult to train. We present a residual learning framework to ease the training of networks that are substantially deeper than those used previously. We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions. We provide comprehensive empirical evidence showing that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth. On the ImageNet dataset we evaluate residual nets with a depth of up to 152 layers---8x deeper than VGG ne"
+ },
+ {
+  "key": "vit",
+  "arxiv": "2010.11929",
+  "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+  "authors": [
+   "Alexey Dosovitskiy",
+   "Lucas Beyer",
+   "Alexander Kolesnikov",
+   "Dirk Weissenborn",
+   "Xiaohua Zhai",
+   "Thomas Unterthiner"
+  ],
+  "year": 2020,
+  "published": "2020-10-22",
+  "file": "2010.11929_vit.pdf",
+  "summary": "While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited. In vision, attention is either applied in conjunction with convolutional networks, or used to replace certain components of convolutional networks while keeping their overall structure in place. We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks. When pre-trained on large amounts of data and transferred to multiple m"
+ },
+ {
+  "key": "clip",
+  "arxiv": "2103.00020",
+  "title": "Learning Transferable Visual Models From Natural Language Supervision",
+  "authors": [
+   "Alec Radford",
+   "Jong Wook Kim",
+   "Chris Hallacy",
+   "Aditya Ramesh",
+   "Gabriel Goh",
+   "Sandhini Agarwal"
+  ],
+  "year": 2021,
+  "published": "2021-02-26",
+  "file": "2103.00020_clip.pdf",
+  "summary": "State-of-the-art computer vision systems are trained to predict a fixed set of predetermined object categories. This restricted form of supervision limits their generality and usability since additional labeled data is needed to specify any other visual concept. Learning directly from raw text about images is a promising alternative which leverages a much broader source of supervision. We demonstrate that the simple pre-training task of predicting which caption goes with which image is an efficient and scalable way to learn SOTA image representations from scratch on a dataset of 400 million (i"
+ },
+ {
+  "key": "dinov2",
+  "arxiv": "2304.07193",
+  "title": "DINOv2: Learning Robust Visual Features without Supervision",
+  "authors": [
+   "Maxime Oquab",
+   "Timothée Darcet",
+   "Théo Moutakanni",
+   "Huy Vo",
+   "Marc Szafraniec",
+   "Vasil Khalidov"
+  ],
+  "year": 2023,
+  "published": "2023-04-14",
+  "file": "2304.07193_dinov2.pdf",
+  "summary": "The recent breakthroughs in natural language processing for model pretraining on large quantities of data have opened the way for similar foundation models in computer vision. These models could greatly simplify the use of images in any system by producing all-purpose visual features, i.e., features that work across image distributions and tasks without finetuning. This work shows that existing pretraining methods, especially self-supervised methods, can produce such features if trained on enough curated data from diverse sources. We revisit existing approaches and combine different techniques"
+ },
+ {
+  "key": "sam",
+  "arxiv": "2304.02643",
+  "title": "Segment Anything",
+  "authors": [
+   "Alexander Kirillov",
+   "Eric Mintun",
+   "Nikhila Ravi",
+   "Hanzi Mao",
+   "Chloe Rolland",
+   "Laura Gustafson"
+  ],
+  "year": 2023,
+  "published": "2023-04-05",
+  "file": "2304.02643_sam.pdf",
+  "summary": "We introduce the Segment Anything (SA) project: a new task, model, and dataset for image segmentation. Using our efficient model in a data collection loop, we built the largest segmentation dataset to date (by far), with over 1 billion masks on 11M licensed and privacy respecting images. The model is designed and trained to be promptable, so it can transfer zero-shot to new image distributions and tasks. We evaluate its capabilities on numerous tasks and find that its zero-shot performance is impressive -- often competitive with or even superior to prior fully supervised results. We are releas"
+ },
+ {
+  "key": "sam2",
+  "arxiv": "2408.00714",
+  "title": "SAM 2: Segment Anything in Images and Videos",
+  "authors": [
+   "Nikhila Ravi",
+   "Valentin Gabeur",
+   "Yuan-Ting Hu",
+   "Ronghang Hu",
+   "Chaitanya Ryali",
+   "Tengyu Ma"
+  ],
+  "year": 2024,
+  "published": "2024-08-01",
+  "file": "2408.00714_sam2.pdf",
+  "summary": "We present Segment Anything Model 2 (SAM 2), a foundation model towards solving promptable visual segmentation in images and videos. We build a data engine, which improves model and data via user interaction, to collect the largest video segmentation dataset to date. Our model is a simple transformer architecture with streaming memory for real-time video processing. SAM 2 trained on our data provides strong performance across a wide range of tasks. In video segmentation, we observe better accuracy, using 3x fewer interactions than prior approaches. In image segmentation, our model is more accu"
+ },
+ {
+  "key": "detr",
+  "arxiv": "2005.12872",
+  "title": "End-to-End Object Detection with Transformers",
+  "authors": [
+   "Nicolas Carion",
+   "Francisco Massa",
+   "Gabriel Synnaeve",
+   "Nicolas Usunier",
+   "Alexander Kirillov",
+   "Sergey Zagoruyko"
+  ],
+  "year": 2020,
+  "published": "2020-05-26",
+  "file": "2005.12872_detr.pdf",
+  "summary": "We present a new method that views object detection as a direct set prediction problem. Our approach streamlines the detection pipeline, effectively removing the need for many hand-designed components like a non-maximum suppression procedure or anchor generation that explicitly encode our prior knowledge about the task. The main ingredients of the new framework, called DEtection TRansformer or DETR, are a set-based global loss that forces unique predictions via bipartite matching, and a transformer encoder-decoder architecture. Given a fixed small set of learned object queries, DETR reasons ab"
+ },
+ {
+  "key": "depthanything",
+  "arxiv": "2401.10891",
+  "title": "Depth Anything: Unleashing the Power of Large-Scale Unlabeled Data",
+  "authors": [
+   "Lihe Yang",
+   "Bingyi Kang",
+   "Zilong Huang",
+   "Xiaogang Xu",
+   "Jiashi Feng",
+   "Hengshuang Zhao"
+  ],
+  "year": 2024,
+  "published": "2024-01-19",
+  "file": "2401.10891_depthanything.pdf",
+  "summary": "This work presents Depth Anything, a highly practical solution for robust monocular depth estimation. Without pursuing novel technical modules, we aim to build a simple yet powerful foundation model dealing with any images under any circumstances. To this end, we scale up the dataset by designing a data engine to collect and automatically annotate large-scale unlabeled data (~62M), which significantly enlarges the data coverage and thus is able to reduce the generalization error. We investigate two simple yet effective strategies that make data scaling-up promising. First, a more challenging o"
+ },
+ {
+  "key": "spatialvlm",
+  "arxiv": "2401.12168",
+  "title": "SpatialVLM: Endowing Vision-Language Models with Spatial Reasoning Capabilities",
+  "authors": [
+   "Boyuan Chen",
+   "Zhuo Xu",
+   "Sean Kirmani",
+   "Brian Ichter",
+   "Danny Driess",
+   "Pete Florence"
+  ],
+  "year": 2024,
+  "published": "2024-01-22",
+  "file": "2401.12168_spatialvlm.pdf",
+  "summary": "Understanding and reasoning about spatial relationships is a fundamental capability for Visual Question Answering (VQA) and robotics. While Vision Language Models (VLM) have demonstrated remarkable performance in certain VQA benchmarks, they still lack capabilities in 3D spatial reasoning, such as recognizing quantitative relationships of physical objects like distances or size differences. We hypothesize that VLMs' limited spatial reasoning capability is due to the lack of 3D spatial knowledge in training data and aim to solve this problem by training VLMs with Internet-scale spatial reasonin"
+ },
+ {
+  "key": "nerf",
+  "arxiv": "2003.08934",
+  "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+  "authors": [
+   "Ben Mildenhall",
+   "Pratul P. Srinivasan",
+   "Matthew Tancik",
+   "Jonathan T. Barron",
+   "Ravi Ramamoorthi",
+   "Ren Ng"
+  ],
+  "year": 2020,
+  "published": "2020-03-19",
+  "file": "2003.08934_nerf.pdf",
+  "summary": "We present a method that achieves state-of-the-art results for synthesizing novel views of complex scenes by optimizing an underlying continuous volumetric scene function using a sparse set of input views. Our algorithm represents a scene using a fully-connected (non-convolutional) deep network, whose input is a single continuous 5D coordinate (spatial location $(x,y,z)$ and viewing direction $(θ, φ)$) and whose output is the volume density and view-dependent emitted radiance at that spatial location. We synthesize views by querying 5D coordinates along camera rays and use classic volume rende"
+ },
+ {
+  "key": "gaussian_splatting",
+  "arxiv": "2308.04079",
+  "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+  "authors": [
+   "Bernhard Kerbl",
+   "Georgios Kopanas",
+   "Thomas Leimkühler",
+   "George Drettakis"
+  ],
+  "year": 2023,
+  "published": "2023-08-08",
+  "file": "2308.04079_gaussian_splatting.pdf",
+  "summary": "Radiance Field methods have recently revolutionized novel-view synthesis of scenes captured with multiple photos or videos. However, achieving high visual quality still requires neural networks that are costly to train and render, while recent faster methods inevitably trade off speed for quality. For unbounded and complete scenes (rather than isolated objects) and 1080p resolution rendering, no current method can achieve real-time display rates. We introduce three key elements that allow us to achieve state-of-the-art visual quality while maintaining competitive training times and importantly"
+ },
+ {
+  "key": "orbslam2",
+  "arxiv": "1610.06475",
+  "title": "ORB-SLAM2: an Open-Source SLAM System for Monocular, Stereo and RGB-D Cameras",
+  "authors": [
+   "Raul Mur-Artal",
+   "Juan D. Tardos"
+  ],
+  "year": 2016,
+  "published": "2016-10-20",
+  "file": "1610.06475_orbslam2.pdf",
+  "summary": "We present ORB-SLAM2 a complete SLAM system for monocular, stereo and RGB-D cameras, including map reuse, loop closing and relocalization capabilities. The system works in real-time on standard CPUs in a wide variety of environments from small hand-held indoors sequences, to drones flying in industrial environments and cars driving around a city. Our back-end based on bundle adjustment with monocular and stereo observations allows for accurate trajectory estimation with metric scale. Our system includes a lightweight localization mode that leverages visual odometry tracks for unmapped regions "
+ },
+ {
+  "key": "droidslam",
+  "arxiv": "2108.10869",
+  "title": "DROID-SLAM: Deep Visual SLAM for Monocular, Stereo, and RGB-D Cameras",
+  "authors": [
+   "Zachary Teed",
+   "Jia Deng"
+  ],
+  "year": 2021,
+  "published": "2021-08-24",
+  "file": "2108.10869_droidslam.pdf",
+  "summary": "We introduce DROID-SLAM, a new deep learning based SLAM system. DROID-SLAM consists of recurrent iterative updates of camera pose and pixelwise depth through a Dense Bundle Adjustment layer. DROID-SLAM is accurate, achieving large improvements over prior work, and robust, suffering from substantially fewer catastrophic failures. Despite training on monocular video, it can leverage stereo or RGB-D video to achieve improved performance at test time. The URL to our open source code is https://github.com/princeton-vl/DROID-SLAM."
+ },
+ {
+  "key": "posecnn",
+  "arxiv": "1711.00199",
+  "title": "PoseCNN: A Convolutional Neural Network for 6D Object Pose Estimation in Cluttered Scenes",
+  "authors": [
+   "Yu Xiang",
+   "Tanner Schmidt",
+   "Venkatraman Narayanan",
+   "Dieter Fox"
+  ],
+  "year": 2017,
+  "published": "2017-11-01",
+  "file": "1711.00199_posecnn.pdf",
+  "summary": "Estimating the 6D pose of known objects is important for robots to interact with the real world. The problem is challenging due to the variety of objects as well as the complexity of a scene caused by clutter and occlusions between objects. In this work, we introduce PoseCNN, a new Convolutional Neural Network for 6D object pose estimation. PoseCNN estimates the 3D translation of an object by localizing its center in the image and predicting its distance from the camera. The 3D rotation of the object is estimated by regressing to a quaternion representation. We also introduce a novel loss func"
+ },
+ {
+  "key": "pvnet",
+  "arxiv": "1812.11788",
+  "title": "PVNet: Pixel-wise Voting Network for 6DoF Pose Estimation",
+  "authors": [
+   "Sida Peng",
+   "Yuan Liu",
+   "Qixing Huang",
+   "Hujun Bao",
+   "Xiaowei Zhou"
+  ],
+  "year": 2018,
+  "published": "2018-12-31",
+  "file": "1812.11788_pvnet.pdf",
+  "summary": "This paper addresses the challenge of 6DoF pose estimation from a single RGB image under severe occlusion or truncation. Many recent works have shown that a two-stage approach, which first detects keypoints and then solves a Perspective-n-Point (PnP) problem for pose estimation, achieves remarkable performance. However, most of these methods only localize a set of sparse keypoints by regressing their image coordinates or heatmaps, which are sensitive to occlusion and truncation. Instead, we introduce a Pixel-wise Voting Network (PVNet) to regress pixel-wise unit vectors pointing to the keypoin"
+ },
+ {
+  "key": "foundationpose",
+  "arxiv": "2312.08344",
+  "title": "FoundationPose: Unified 6D Pose Estimation and Tracking of Novel Objects",
+  "authors": [
+   "Bowen Wen",
+   "Wei Yang",
+   "Jan Kautz",
+   "Stan Birchfield"
+  ],
+  "year": 2023,
+  "published": "2023-12-13",
+  "file": "2312.08344_foundationpose.pdf",
+  "summary": "We present FoundationPose, a unified foundation model for 6D object pose estimation and tracking, supporting both model-based and model-free setups. Our approach can be instantly applied at test-time to a novel object without fine-tuning, as long as its CAD model is given, or a small number of reference images are captured. We bridge the gap between these two setups with a neural implicit representation that allows for effective novel view synthesis, keeping the downstream pose estimation modules invariant under the same unified framework. Strong generalizability is achieved via large-scale sy"
+ },
+ {
+  "key": "graspnet",
+  "arxiv": "1905.10520",
+  "title": "6-DOF GraspNet: Variational Grasp Generation for Object Manipulation",
+  "authors": [
+   "Arsalan Mousavian",
+   "Clemens Eppner",
+   "Dieter Fox"
+  ],
+  "year": 2019,
+  "published": "2019-05-25",
+  "file": "1905.10520_graspnet.pdf",
+  "summary": "Generating grasp poses is a crucial component for any robot object manipulation task. In this work, we formulate the problem of grasp generation as sampling a set of grasps using a variational autoencoder and assess and refine the sampled grasps using a grasp evaluator model. Both Grasp Sampler and Grasp Refinement networks take 3D point clouds observed by a depth camera as input. We evaluate our approach in simulation and real-world robot experiments. Our approach achieves 88\\% success rate on various commonly used objects with diverse appearances, scales, and weights. Our model is trained pu"
+ },
+ {
+  "key": "dexnet",
+  "arxiv": "1703.09312",
+  "title": "Dex-Net 2.0: Deep Learning to Plan Robust Grasps with Synthetic Point Clouds and Analytic Grasp Metrics",
+  "authors": [
+   "Jeffrey Mahler",
+   "Jacky Liang",
+   "Sherdil Niyaz",
+   "Michael Laskey",
+   "Richard Doan",
+   "Xinyu Liu"
+  ],
+  "year": 2017,
+  "published": "2017-03-27",
+  "file": "1703.09312_dexnet.pdf",
+  "summary": "To reduce data collection time for deep learning of robust robotic grasp plans, we explore training from a synthetic dataset of 6.7 million point clouds, grasps, and analytic grasp metrics generated from thousands of 3D models from Dex-Net 1.0 in randomized poses on a table. We use the resulting dataset, Dex-Net 2.0, to train a Grasp Quality Convolutional Neural Network (GQ-CNN) model that rapidly predicts the probability of success of grasps from depth images, where grasps are specified as the planar position, angle, and depth of a gripper relative to an RGB-D sensor. Experiments with over 1,"
+ },
+ {
+  "key": "contactgraspnet",
+  "arxiv": "2103.14127",
+  "title": "Contact-GraspNet: Efficient 6-DoF Grasp Generation in Cluttered Scenes",
+  "authors": [
+   "Martin Sundermeyer",
+   "Arsalan Mousavian",
+   "Rudolph Triebel",
+   "Dieter Fox"
+  ],
+  "year": 2021,
+  "published": "2021-03-25",
+  "file": "2103.14127_contactgraspnet.pdf",
+  "summary": "Grasping unseen objects in unconstrained, cluttered environments is an essential skill for autonomous robotic manipulation. Despite recent progress in full 6-DoF grasp learning, existing approaches often consist of complex sequential pipelines that possess several potential failure points and run-times unsuitable for closed-loop grasping. Therefore, we propose an end-to-end network that efficiently generates a distribution of 6-DoF parallel-jaw grasps directly from a depth recording of a scene. Our novel grasp representation treats 3D points of the recorded point cloud as potential grasp conta"
+ },
+ {
+  "key": "dexgraspnet",
+  "arxiv": "2210.02697",
+  "title": "DexGraspNet: A Large-Scale Robotic Dexterous Grasp Dataset for General Objects Based on Simulation",
+  "authors": [
+   "Ruicheng Wang",
+   "Jialiang Zhang",
+   "Jiayi Chen",
+   "Yinzhen Xu",
+   "Puhao Li",
+   "Tengyu Liu"
+  ],
+  "year": 2022,
+  "published": "2022-10-06",
+  "file": "2210.02697_dexgraspnet.pdf",
+  "summary": "Robotic dexterous grasping is the first step to enable human-like dexterous object manipulation and thus a crucial robotic technology. However, dexterous grasping is much more under-explored than object grasping with parallel grippers, partially due to the lack of a large-scale dataset. In this work, we present a large-scale robotic dexterous grasp dataset, DexGraspNet, generated by our proposed highly efficient synthesis method that can be generally applied to any dexterous hand. Our method leverages a deeply accelerated differentiable force closure estimator and thus can efficiently and robu"
+ },
+ {
+  "key": "conceptgraphs",
+  "arxiv": "2309.16650",
+  "title": "ConceptGraphs: Open-Vocabulary 3D Scene Graphs for Perception and Planning",
+  "authors": [
+   "Qiao Gu",
+   "Alihusein Kuwajerwala",
+   "Sacha Morin",
+   "Krishna Murthy Jatavallabhula",
+   "Bipasha Sen",
+   "Aditya Agarwal"
+  ],
+  "year": 2023,
+  "published": "2023-09-28",
+  "file": "2309.16650_conceptgraphs.pdf",
+  "summary": "For robots to perform a wide variety of tasks, they require a 3D representation of the world that is semantically rich, yet compact and efficient for task-driven perception and planning. Recent approaches have attempted to leverage features from large vision-language models to encode semantics in 3D representations. However, these approaches tend to produce maps with per-point feature vectors, which do not scale well in larger environments, nor do they contain semantic spatial relationships between entities in the environment, which are useful for downstream planning. In this work, we propose "
+ },
+ {
+  "key": "habitat",
+  "arxiv": "1904.01201",
+  "title": "Habitat: A Platform for Embodied AI Research",
+  "authors": [
+   "Manolis Savva",
+   "Abhishek Kadian",
+   "Oleksandr Maksymets",
+   "Yili Zhao",
+   "Erik Wijmans",
+   "Bhavana Jain"
+  ],
+  "year": 2019,
+  "published": "2019-04-02",
+  "file": "1904.01201_habitat.pdf",
+  "summary": "We present Habitat, a platform for research in embodied artificial intelligence (AI). Habitat enables training embodied agents (virtual robots) in highly efficient photorealistic 3D simulation. Specifically, Habitat consists of: (i) Habitat-Sim: a flexible, high-performance 3D simulator with configurable agents, sensors, and generic 3D dataset handling. Habitat-Sim is fast -- when rendering a scene from Matterport3D, it achieves several thousand frames per second (fps) running single-threaded, and can reach over 10,000 fps multi-process on a single GPU. (ii) Habitat-API: a modular high-level l"
+ },
+ {
+  "key": "alfred",
+  "arxiv": "1912.01734",
+  "title": "ALFRED: A Benchmark for Interpreting Grounded Instructions for Everyday Tasks",
+  "authors": [
+   "Mohit Shridhar",
+   "Jesse Thomason",
+   "Daniel Gordon",
+   "Yonatan Bisk",
+   "Winson Han",
+   "Roozbeh Mottaghi"
+  ],
+  "year": 2019,
+  "published": "2019-12-03",
+  "file": "1912.01734_alfred.pdf",
+  "summary": "We present ALFRED (Action Learning From Realistic Environments and Directives), a benchmark for learning a mapping from natural language instructions and egocentric vision to sequences of actions for household tasks. ALFRED includes long, compositional tasks with non-reversible state changes to shrink the gap between research benchmarks and real-world applications. ALFRED consists of expert demonstrations in interactive visual environments for 25k natural language directives. These directives contain both high-level goals like \"Rinse off a mug and place it in the coffee maker.\" and low-level l"
+ },
+ {
+  "key": "thor",
+  "arxiv": "1712.05474",
+  "title": "AI2-THOR: An Interactive 3D Environment for Visual AI",
+  "authors": [
+   "Eric Kolve",
+   "Roozbeh Mottaghi",
+   "Winson Han",
+   "Eli VanderBilt",
+   "Luca Weihs",
+   "Alvaro Herrasti"
+  ],
+  "year": 2017,
+  "published": "2017-12-14",
+  "file": "1712.05474_thor.pdf",
+  "summary": "We introduce The House Of inteRactions (THOR), a framework for visual AI research, available at http://ai2thor.allenai.org. AI2-THOR consists of near photo-realistic 3D indoor scenes, where AI agents can navigate in the scenes and interact with objects to perform tasks. AI2-THOR enables research in many different domains including but not limited to deep reinforcement learning, imitation learning, learning by interaction, planning, visual question answering, unsupervised representation learning, object detection and segmentation, and learning models of cognition. The goal of AI2-THOR is to fac"
+ },
+ {
+  "key": "minedojo",
+  "arxiv": "2206.08853",
+  "title": "MineDojo: Building Open-Ended Embodied Agents with Internet-Scale Knowledge",
+  "authors": [
+   "Linxi Fan",
+   "Guanzhi Wang",
+   "Yunfan Jiang",
+   "Ajay Mandlekar",
+   "Yuncong Yang",
+   "Haoyi Zhu"
+  ],
+  "year": 2022,
+  "published": "2022-06-17",
+  "file": "2206.08853_minedojo.pdf",
+  "summary": "Autonomous agents have made great strides in specialist domains like Atari games and Go. However, they typically learn tabula rasa in isolated environments with limited and manually conceived objectives, thus failing to generalize across a wide spectrum of tasks and capabilities. Inspired by how humans continually learn and adapt in the open world, we advocate a trinity of ingredients for building generalist agents: 1) an environment that supports a multitude of tasks and goals, 2) a large-scale database of multimodal knowledge, and 3) a flexible and scalable agent architecture. We introduce M"
+ },
+ {
+  "key": "dqn",
+  "arxiv": "1312.5602",
+  "title": "Playing Atari with Deep Reinforcement Learning",
+  "authors": [
+   "Volodymyr Mnih",
+   "Koray Kavukcuoglu",
+   "David Silver",
+   "Alex Graves",
+   "Ioannis Antonoglou",
+   "Daan Wierstra"
+  ],
+  "year": 2013,
+  "published": "2013-12-19",
+  "file": "1312.5602_dqn.pdf",
+  "summary": "We present the first deep learning model to successfully learn control policies directly from high-dimensional sensory input using reinforcement learning. The model is a convolutional neural network, trained with a variant of Q-learning, whose input is raw pixels and whose output is a value function estimating future rewards. We apply our method to seven Atari 2600 games from the Arcade Learning Environment, with no adjustment of the architecture or learning algorithm. We find that it outperforms all previous approaches on six of the games and surpasses a human expert on three of them."
+ },
+ {
+  "key": "ddpg",
+  "arxiv": "1509.02971",
+  "title": "Continuous control with deep reinforcement learning",
+  "authors": [
+   "Timothy P. Lillicrap",
+   "Jonathan J. Hunt",
+   "Alexander Pritzel",
+   "Nicolas Heess",
+   "Tom Erez",
+   "Yuval Tassa"
+  ],
+  "year": 2015,
+  "published": "2015-09-09",
+  "file": "1509.02971_ddpg.pdf",
+  "summary": "We adapt the ideas underlying the success of Deep Q-Learning to the continuous action domain. We present an actor-critic, model-free algorithm based on the deterministic policy gradient that can operate over continuous action spaces. Using the same learning algorithm, network architecture and hyper-parameters, our algorithm robustly solves more than 20 simulated physics tasks, including classic problems such as cartpole swing-up, dexterous manipulation, legged locomotion and car driving. Our algorithm is able to find policies whose performance is competitive with those found by a planning algo"
+ },
+ {
+  "key": "ppo",
+  "arxiv": "1707.06347",
+  "title": "Proximal Policy Optimization Algorithms",
+  "authors": [
+   "John Schulman",
+   "Filip Wolski",
+   "Prafulla Dhariwal",
+   "Alec Radford",
+   "Oleg Klimov"
+  ],
+  "year": 2017,
+  "published": "2017-07-20",
+  "file": "1707.06347_ppo.pdf",
+  "summary": "We propose a new family of policy gradient methods for reinforcement learning, which alternate between sampling data through interaction with the environment, and optimizing a \"surrogate\" objective function using stochastic gradient ascent. Whereas standard policy gradient methods perform one gradient update per data sample, we propose a novel objective function that enables multiple epochs of minibatch updates. The new methods, which we call proximal policy optimization (PPO), have some of the benefits of trust region policy optimization (TRPO), but they are much simpler to implement, more ge"
+ },
+ {
+  "key": "sac",
+  "arxiv": "1801.01290",
+  "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+  "authors": [
+   "Tuomas Haarnoja",
+   "Aurick Zhou",
+   "Pieter Abbeel",
+   "Sergey Levine"
+  ],
+  "year": 2018,
+  "published": "2018-01-04",
+  "file": "1801.01290_sac.pdf",
+  "summary": "Model-free deep reinforcement learning (RL) algorithms have been demonstrated on a range of challenging decision making and control tasks. However, these methods typically suffer from two major challenges: very high sample complexity and brittle convergence properties, which necessitate meticulous hyperparameter tuning. Both of these challenges severely limit the applicability of such methods to complex, real-world domains. In this paper, we propose soft actor-critic, an off-policy actor-critic deep RL algorithm based on the maximum entropy reinforcement learning framework. In this framework, "
+ },
+ {
+  "key": "dreamerv3",
+  "arxiv": "2301.04104",
+  "title": "Mastering Diverse Domains through World Models",
+  "authors": [
+   "Danijar Hafner",
+   "Jurgis Pasukonis",
+   "Jimmy Ba",
+   "Timothy Lillicrap"
+  ],
+  "year": 2023,
+  "published": "2023-01-10",
+  "file": "2301.04104_dreamerv3.pdf",
+  "summary": "Developing a general algorithm that learns to solve tasks across a wide range of applications has been a fundamental challenge in artificial intelligence. Although current reinforcement learning algorithms can be readily applied to tasks similar to what they have been developed for, configuring them for new application domains requires significant human expertise and experimentation. We present DreamerV3, a general algorithm that outperforms specialized methods across over 150 diverse tasks, with a single configuration. Dreamer learns a model of the environment and improves its behavior by ima"
+ },
+ {
+  "key": "decision_transformer",
+  "arxiv": "2106.01345",
+  "title": "Decision Transformer: Reinforcement Learning via Sequence Modeling",
+  "authors": [
+   "Lili Chen",
+   "Kevin Lu",
+   "Aravind Rajeswaran",
+   "Kimin Lee",
+   "Aditya Grover",
+   "Michael Laskin"
+  ],
+  "year": 2021,
+  "published": "2021-06-02",
+  "file": "2106.01345_decision_transformer.pdf",
+  "summary": "We introduce a framework that abstracts Reinforcement Learning (RL) as a sequence modeling problem. This allows us to draw upon the simplicity and scalability of the Transformer architecture, and associated advances in language modeling such as GPT-x and BERT. In particular, we present Decision Transformer, an architecture that casts the problem of RL as conditional sequence modeling. Unlike prior approaches to RL that fit value functions or compute policy gradients, Decision Transformer simply outputs the optimal actions by leveraging a causally masked Transformer. By conditioning an autoregr"
+ },
+ {
+  "key": "diffuser",
+  "arxiv": "2205.09991",
+  "title": "Planning with Diffusion for Flexible Behavior Synthesis",
+  "authors": [
+   "Michael Janner",
+   "Yilun Du",
+   "Joshua B. Tenenbaum",
+   "Sergey Levine"
+  ],
+  "year": 2022,
+  "published": "2022-05-20",
+  "file": "2205.09991_diffuser.pdf",
+  "summary": "Model-based reinforcement learning methods often use learning only for the purpose of estimating an approximate dynamics model, offloading the rest of the decision-making work to classical trajectory optimizers. While conceptually simple, this combination has a number of empirical shortcomings, suggesting that learned models may not be well-suited to standard trajectory optimization. In this paper, we consider what it would look like to fold as much of the trajectory optimization pipeline as possible into the modeling problem, such that sampling from the model and planning with it become nearl"
+ },
+ {
+  "key": "domain_randomization",
+  "arxiv": "1703.06907",
+  "title": "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World",
+  "authors": [
+   "Josh Tobin",
+   "Rachel Fong",
+   "Alex Ray",
+   "Jonas Schneider",
+   "Wojciech Zaremba",
+   "Pieter Abbeel"
+  ],
+  "year": 2017,
+  "published": "2017-03-20",
+  "file": "1703.06907_domain_randomization.pdf",
+  "summary": "Bridging the 'reality gap' that separates simulated robotics from experiments on hardware could accelerate robotic research through improved data availability. This paper explores domain randomization, a simple technique for training models on simulated images that transfer to real images by randomizing rendering in the simulator. With enough variability in the simulator, the real world may appear to the model as just another variation. We focus on the task of object localization, which is a stepping stone to general robotic manipulation skills. We find that it is possible to train a real-worl"
+ },
+ {
+  "key": "isaacgym",
+  "arxiv": "2108.10470",
+  "title": "Isaac Gym: High Performance GPU-Based Physics Simulation For Robot Learning",
+  "authors": [
+   "Viktor Makoviychuk",
+   "Lukasz Wawrzyniak",
+   "Yunrong Guo",
+   "Michelle Lu",
+   "Kier Storey",
+   "Miles Macklin"
+  ],
+  "year": 2021,
+  "published": "2021-08-24",
+  "file": "2108.10470_isaacgym.pdf",
+  "summary": "Isaac Gym offers a high performance learning platform to train policies for wide variety of robotics tasks directly on GPU. Both physics simulation and the neural network policy training reside on GPU and communicate by directly passing data from physics buffers to PyTorch tensors without ever going through any CPU bottlenecks. This leads to blazing fast training times for complex robotics tasks on a single GPU with 2-3 orders of magnitude improvements compared to conventional RL training that uses a CPU based simulator and GPU for neural networks. We host the results and videos at \\url{https:"
+ },
+ {
+  "key": "rma",
+  "arxiv": "2107.04034",
+  "title": "RMA: Rapid Motor Adaptation for Legged Robots",
+  "authors": [
+   "Ashish Kumar",
+   "Zipeng Fu",
+   "Deepak Pathak",
+   "Jitendra Malik"
+  ],
+  "year": 2021,
+  "published": "2021-07-08",
+  "file": "2107.04034_rma.pdf",
+  "summary": "Successful real-world deployment of legged robots would require them to adapt in real-time to unseen scenarios like changing terrains, changing payloads, wear and tear. This paper presents Rapid Motor Adaptation (RMA) algorithm to solve this problem of real-time online adaptation in quadruped robots. RMA consists of two components: a base policy and an adaptation module. The combination of these components enables the robot to adapt to novel situations in fractions of a second. RMA is trained completely in simulation without using any domain knowledge like reference trajectories or predefined "
+ },
+ {
+  "key": "parkour",
+  "arxiv": "2309.05665",
+  "title": "Robot Parkour Learning",
+  "authors": [
+   "Ziwen Zhuang",
+   "Zipeng Fu",
+   "Jianren Wang",
+   "Christopher Atkeson",
+   "Soeren Schwertfeger",
+   "Chelsea Finn"
+  ],
+  "year": 2023,
+  "published": "2023-09-11",
+  "file": "2309.05665_parkour.pdf",
+  "summary": "Parkour is a grand challenge for legged locomotion that requires robots to overcome various obstacles rapidly in complex environments. Existing methods can generate either diverse but blind locomotion skills or vision-based but specialized skills by using reference animal data or complex rewards. However, autonomous parkour requires robots to learn generalizable skills that are both vision-based and diverse to perceive and react to various scenarios. In this work, we propose a system for learning a single end-to-end vision-based parkour policy of diverse parkour skills using a simple reward wi"
+ },
+ {
+  "key": "humanoid_transformer",
+  "arxiv": "2303.03381",
+  "title": "Real-World Humanoid Locomotion with Reinforcement Learning",
+  "authors": [
+   "Ilija Radosavovic",
+   "Tete Xiao",
+   "Bike Zhang",
+   "Trevor Darrell",
+   "Jitendra Malik",
+   "Koushil Sreenath"
+  ],
+  "year": 2023,
+  "published": "2023-03-06",
+  "file": "2303.03381_humanoid_transformer.pdf",
+  "summary": "Humanoid robots that can autonomously operate in diverse environments have the potential to help address labour shortages in factories, assist elderly at homes, and colonize new planets. While classical controllers for humanoid robots have shown impressive results in a number of settings, they are challenging to generalize and adapt to new environments. Here, we present a fully learning-based approach for real-world humanoid locomotion. Our controller is a causal transformer that takes the history of proprioceptive observations and actions as input and predicts the next action. We hypothesize "
+ },
+ {
+  "key": "dagger",
+  "arxiv": "1011.0686",
+  "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning",
+  "authors": [
+   "Stephane Ross",
+   "Geoffrey J. Gordon",
+   "J. Andrew Bagnell"
+  ],
+  "year": 2010,
+  "published": "2010-11-02",
+  "file": "1011.0686_dagger.pdf",
+  "summary": "Sequential prediction problems such as imitation learning, where future observations depend on previous predictions (actions), violate the common i.i.d. assumptions made in statistical learning. This leads to poor performance in theory and often in practice. Some recent approaches provide stronger guarantees in this setting, but remain somewhat unsatisfactory as they train either non-stationary or stochastic policies and require a large number of iterations. In this paper, we propose a new iterative algorithm, which trains a stationary deterministic policy, that can be seen as a no regret algo"
+ },
+ {
+  "key": "diffusion_policy",
+  "arxiv": "2303.04137",
+  "title": "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion",
+  "authors": [
+   "Cheng Chi",
+   "Zhenjia Xu",
+   "Siyuan Feng",
+   "Eric Cousineau",
+   "Yilun Du",
+   "Benjamin Burchfiel"
+  ],
+  "year": 2023,
+  "published": "2023-03-07",
+  "file": "2303.04137_diffusion_policy.pdf",
+  "summary": "This paper introduces Diffusion Policy, a new way of generating robot behavior by representing a robot's visuomotor policy as a conditional denoising diffusion process. We benchmark Diffusion Policy across 12 different tasks from 4 different robot manipulation benchmarks and find that it consistently outperforms existing state-of-the-art robot learning methods with an average improvement of 46.9%. Diffusion Policy learns the gradient of the action-distribution score function and iteratively optimizes with respect to this gradient field during inference via a series of stochastic Langevin dynam"
+ },
+ {
+  "key": "act",
+  "arxiv": "2304.13705",
+  "title": "Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware",
+  "authors": [
+   "Tony Z. Zhao",
+   "Vikash Kumar",
+   "Sergey Levine",
+   "Chelsea Finn"
+  ],
+  "year": 2023,
+  "published": "2023-04-23",
+  "file": "2304.13705_act.pdf",
+  "summary": "Fine manipulation tasks, such as threading cable ties or slotting a battery, are notoriously difficult for robots because they require precision, careful coordination of contact forces, and closed-loop visual feedback. Performing these tasks typically requires high-end robots, accurate sensors, or careful calibration, which can be expensive and difficult to set up. Can learning enable low-cost and imprecise hardware to perform these fine manipulation tasks? We present a low-cost system that performs end-to-end imitation learning directly from real demonstrations, collected with a custom teleop"
+ },
+ {
+  "key": "mobile_aloha",
+  "arxiv": "2401.02117",
+  "title": "Mobile ALOHA: Learning Bimanual Mobile Manipulation with Low-Cost Whole-Body Teleoperation",
+  "authors": [
+   "Zipeng Fu",
+   "Tony Z. Zhao",
+   "Chelsea Finn"
+  ],
+  "year": 2024,
+  "published": "2024-01-04",
+  "file": "2401.02117_mobile_aloha.pdf",
+  "summary": "Imitation learning from human demonstrations has shown impressive performance in robotics. However, most results focus on table-top manipulation, lacking the mobility and dexterity necessary for generally useful tasks. In this work, we develop a system for imitating mobile manipulation tasks that are bimanual and require whole-body control. We first present Mobile ALOHA, a low-cost and whole-body teleoperation system for data collection. It augments the ALOHA system with a mobile base, and a whole-body teleoperation interface. Using data collected with Mobile ALOHA, we then perform supervised "
+ },
+ {
+  "key": "transporter",
+  "arxiv": "2010.14406",
+  "title": "Transporter Networks: Rearranging the Visual World for Robotic Manipulation",
+  "authors": [
+   "Andy Zeng",
+   "Pete Florence",
+   "Jonathan Tompson",
+   "Stefan Welker",
+   "Jonathan Chien",
+   "Maria Attarian"
+  ],
+  "year": 2020,
+  "published": "2020-10-27",
+  "file": "2010.14406_transporter.pdf",
+  "summary": "Robotic manipulation can be formulated as inducing a sequence of spatial displacements: where the space being moved can encompass an object, part of an object, or end effector. In this work, we propose the Transporter Network, a simple model architecture that rearranges deep features to infer spatial displacements from visual input - which can parameterize robot actions. It makes no assumptions of objectness (e.g. canonical poses, models, or keypoints), it exploits spatial symmetries, and is orders of magnitude more sample efficient than our benchmarked alternatives in learning vision-based ma"
+ },
+ {
+  "key": "cliport",
+  "arxiv": "2109.12098",
+  "title": "CLIPort: What and Where Pathways for Robotic Manipulation",
+  "authors": [
+   "Mohit Shridhar",
+   "Lucas Manuelli",
+   "Dieter Fox"
+  ],
+  "year": 2021,
+  "published": "2021-09-24",
+  "file": "2109.12098_cliport.pdf",
+  "summary": "How can we imbue robots with the ability to manipulate objects precisely but also to reason about them in terms of abstract concepts? Recent works in manipulation have shown that end-to-end networks can learn dexterous skills that require precise spatial reasoning, but these methods often fail to generalize to new goals or quickly learn transferable concepts across tasks. In parallel, there has been great progress in learning generalizable semantic representations for vision and language by training on large-scale internet data, however these representations lack the spatial understanding nece"
+ },
+ {
+  "key": "peract",
+  "arxiv": "2209.05451",
+  "title": "Perceiver-Actor: A Multi-Task Transformer for Robotic Manipulation",
+  "authors": [
+   "Mohit Shridhar",
+   "Lucas Manuelli",
+   "Dieter Fox"
+  ],
+  "year": 2022,
+  "published": "2022-09-12",
+  "file": "2209.05451_peract.pdf",
+  "summary": "Transformers have revolutionized vision and natural language processing with their ability to scale with large datasets. But in robotic manipulation, data is both limited and expensive. Can manipulation still benefit from Transformers with the right problem formulation? We investigate this question with PerAct, a language-conditioned behavior-cloning agent for multi-task 6-DoF manipulation. PerAct encodes language goals and RGB-D voxel observations with a Perceiver Transformer, and outputs discretized actions by ``detecting the next best voxel action''. Unlike frameworks that operate on 2D ima"
+ },
+ {
+  "key": "rvt",
+  "arxiv": "2306.14896",
+  "title": "RVT: Robotic View Transformer for 3D Object Manipulation",
+  "authors": [
+   "Ankit Goyal",
+   "Jie Xu",
+   "Yijie Guo",
+   "Valts Blukis",
+   "Yu-Wei Chao",
+   "Dieter Fox"
+  ],
+  "year": 2023,
+  "published": "2023-06-26",
+  "file": "2306.14896_rvt.pdf",
+  "summary": "For 3D object manipulation, methods that build an explicit 3D representation perform better than those relying only on camera images. But using explicit 3D representations like voxels comes at large computing cost, adversely affecting scalability. In this work, we propose RVT, a multi-view transformer for 3D manipulation that is both scalable and accurate. Some key features of RVT are an attention mechanism to aggregate information across views and re-rendering of the camera input from virtual views around the robot workspace. In simulations, we find that a single RVT model works well across 1"
+ },
+ {
+  "key": "diffuser_actor3d",
+  "arxiv": "2402.10885",
+  "title": "3D Diffuser Actor: Policy Diffusion with 3D Scene Representations",
+  "authors": [
+   "Tsung-Wei Ke",
+   "Nikolaos Gkanatsios",
+   "Katerina Fragkiadaki"
+  ],
+  "year": 2024,
+  "published": "2024-02-16",
+  "file": "2402.10885_diffuser_actor3d.pdf",
+  "summary": "Diffusion policies are conditional diffusion models that learn robot action distributions conditioned on the robot and environment state. They have recently shown to outperform both deterministic and alternative action distribution learning formulations. 3D robot policies use 3D scene feature representations aggregated from a single or multiple camera views using sensed depth. They have shown to generalize better than their 2D counterparts across camera viewpoints. We unify these two lines of work and present 3D Diffuser Actor, a neural policy equipped with a novel 3D denoising transformer tha"
+ },
+ {
+  "key": "saycan",
+  "arxiv": "2204.01691",
+  "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+  "authors": [
+   "Michael Ahn",
+   "Anthony Brohan",
+   "Noah Brown",
+   "Yevgen Chebotar",
+   "Omar Cortes",
+   "Byron David"
+  ],
+  "year": 2022,
+  "published": "2022-04-04",
+  "file": "2204.01691_saycan.pdf",
+  "summary": "Large language models can encode a wealth of semantic knowledge about the world. Such knowledge could be extremely useful to robots aiming to act upon high-level, temporally extended instructions expressed in natural language. However, a significant weakness of language models is that they lack real-world experience, which makes it difficult to leverage them for decision making within a given embodiment. For example, asking a language model to describe how to clean a spill might result in a reasonable narrative, but it may not be applicable to a particular agent, such as a robot, that needs to"
+ },
+ {
+  "key": "code_as_policies",
+  "arxiv": "2209.07753",
+  "title": "Code as Policies: Language Model Programs for Embodied Control",
+  "authors": [
+   "Jacky Liang",
+   "Wenlong Huang",
+   "Fei Xia",
+   "Peng Xu",
+   "Karol Hausman",
+   "Brian Ichter"
+  ],
+  "year": 2022,
+  "published": "2022-09-16",
+  "file": "2209.07753_code_as_policies.pdf",
+  "summary": "Large language models (LLMs) trained on code completion have been shown to be capable of synthesizing simple Python programs from docstrings [1]. We find that these code-writing LLMs can be re-purposed to write robot policy code, given natural language commands. Specifically, policy code can express functions or feedback loops that process perception outputs (e.g.,from object detectors [2], [3]) and parameterize control primitive APIs. When provided as input several example language commands (formatted as comments) followed by corresponding policy code (via few-shot prompting), LLMs can take i"
+ },
+ {
+  "key": "voxposer",
+  "arxiv": "2307.05973",
+  "title": "VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models",
+  "authors": [
+   "Wenlong Huang",
+   "Chen Wang",
+   "Ruohan Zhang",
+   "Yunzhu Li",
+   "Jiajun Wu",
+   "Li Fei-Fei"
+  ],
+  "year": 2023,
+  "published": "2023-07-12",
+  "file": "2307.05973_voxposer.pdf",
+  "summary": "Large language models (LLMs) are shown to possess a wealth of actionable knowledge that can be extracted for robot manipulation in the form of reasoning and planning. Despite the progress, most still rely on pre-defined motion primitives to carry out the physical interactions with the environment, which remains a major bottleneck. In this work, we aim to synthesize robot trajectories, i.e., a dense sequence of 6-DoF end-effector waypoints, for a large variety of manipulation tasks given an open-set of instructions and an open-set of objects. We achieve this by first observing that LLMs excel a"
+ },
+ {
+  "key": "palm_e",
+  "arxiv": "2303.03378",
+  "title": "PaLM-E: An Embodied Multimodal Language Model",
+  "authors": [
+   "Danny Driess",
+   "Fei Xia",
+   "Mehdi S. M. Sajjadi",
+   "Corey Lynch",
+   "Aakanksha Chowdhery",
+   "Brian Ichter"
+  ],
+  "year": 2023,
+  "published": "2023-03-06",
+  "file": "2303.03378_palm_e.pdf",
+  "summary": "Large language models excel at a wide range of complex tasks. However, enabling general inference in the real world, e.g., for robotics problems, raises the challenge of grounding. We propose embodied language models to directly incorporate real-world continuous sensor modalities into language models and thereby establish the link between words and percepts. Input to our embodied language model are multi-modal sentences that interleave visual, continuous state estimation, and textual input encodings. We train these encodings end-to-end, in conjunction with a pre-trained large language model, f"
+ },
+ {
+  "key": "vima",
+  "arxiv": "2210.03094",
+  "title": "VIMA: General Robot Manipulation with Multimodal Prompts",
+  "authors": [
+   "Yunfan Jiang",
+   "Agrim Gupta",
+   "Zichen Zhang",
+   "Guanzhi Wang",
+   "Yongqiang Dou",
+   "Yanjun Chen"
+  ],
+  "year": 2022,
+  "published": "2022-10-06",
+  "file": "2210.03094_vima.pdf",
+  "summary": "Prompt-based learning has emerged as a successful paradigm in natural language processing, where a single general-purpose language model can be instructed to perform any task specified by input prompts. Yet task specification in robotics comes in various forms, such as imitating one-shot demonstrations, following language instructions, and reaching visual goals. They are often considered different tasks and tackled by specialized models. We show that a wide spectrum of robot manipulation tasks can be expressed with multimodal prompts, interleaving textual and visual tokens. Accordingly, we dev"
+ },
+ {
+  "key": "inner_monologue",
+  "arxiv": "2207.05608",
+  "title": "Inner Monologue: Embodied Reasoning through Planning with Language Models",
+  "authors": [
+   "Wenlong Huang",
+   "Fei Xia",
+   "Ted Xiao",
+   "Harris Chan",
+   "Jacky Liang",
+   "Pete Florence"
+  ],
+  "year": 2022,
+  "published": "2022-07-12",
+  "file": "2207.05608_inner_monologue.pdf",
+  "summary": "Recent works have shown how the reasoning capabilities of Large Language Models (LLMs) can be applied to domains beyond natural language processing, such as planning and interaction for robots. These embodied problems require an agent to understand many semantic aspects of the world: the repertoire of skills available, how these skills influence the world, and how changes to the world map back to the language. LLMs planning in embodied environments need to consider not just what skills to do, but also how and when to do them - answers that change over time in response to the agent's own choice"
+ },
+ {
+  "key": "progprompt",
+  "arxiv": "2209.11302",
+  "title": "ProgPrompt: Generating Situated Robot Task Plans using Large Language Models",
+  "authors": [
+   "Ishika Singh",
+   "Valts Blukis",
+   "Arsalan Mousavian",
+   "Ankit Goyal",
+   "Danfei Xu",
+   "Jonathan Tremblay"
+  ],
+  "year": 2022,
+  "published": "2022-09-22",
+  "file": "2209.11302_progprompt.pdf",
+  "summary": "Task planning can require defining myriad domain knowledge about the world in which a robot needs to act. To ameliorate that effort, large language models (LLMs) can be used to score potential next actions during task planning, and even generate action sequences directly, given an instruction in natural language with no additional domain information. However, such methods either require enumerating all possible next steps for scoring, or generate free-form text that may contain actions not possible on a given robot in its current context. We present a programmatic LLM prompt structure that ena"
+ },
+ {
+  "key": "react",
+  "arxiv": "2210.03629",
+  "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+  "authors": [
+   "Shunyu Yao",
+   "Jeffrey Zhao",
+   "Dian Yu",
+   "Nan Du",
+   "Izhak Shafran",
+   "Karthik Narasimhan"
+  ],
+  "year": 2022,
+  "published": "2022-10-06",
+  "file": "2210.03629_react.pdf",
+  "summary": "While large language models (LLMs) have demonstrated impressive capabilities across tasks in language understanding and interactive decision making, their abilities for reasoning (e.g. chain-of-thought prompting) and acting (e.g. action plan generation) have primarily been studied as separate topics. In this paper, we explore the use of LLMs to generate both reasoning traces and task-specific actions in an interleaved manner, allowing for greater synergy between the two: reasoning traces help the model induce, track, and update action plans as well as handle exceptions, while actions allow it "
+ },
+ {
+  "key": "voyager",
+  "arxiv": "2305.16291",
+  "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+  "authors": [
+   "Guanzhi Wang",
+   "Yuqi Xie",
+   "Yunfan Jiang",
+   "Ajay Mandlekar",
+   "Chaowei Xiao",
+   "Yuke Zhu"
+  ],
+  "year": 2023,
+  "published": "2023-05-25",
+  "file": "2305.16291_voyager.pdf",
+  "summary": "We introduce Voyager, the first LLM-powered embodied lifelong learning agent in Minecraft that continuously explores the world, acquires diverse skills, and makes novel discoveries without human intervention. Voyager consists of three key components: 1) an automatic curriculum that maximizes exploration, 2) an ever-growing skill library of executable code for storing and retrieving complex behaviors, and 3) a new iterative prompting mechanism that incorporates environment feedback, execution errors, and self-verification for program improvement. Voyager interacts with GPT-4 via blackbox querie"
+ },
+ {
+  "key": "gato",
+  "arxiv": "2205.06175",
+  "title": "A Generalist Agent",
+  "authors": [
+   "Scott Reed",
+   "Konrad Zolna",
+   "Emilio Parisotto",
+   "Sergio Gomez Colmenarejo",
+   "Alexander Novikov",
+   "Gabriel Barth-Maron"
+  ],
+  "year": 2022,
+  "published": "2022-05-12",
+  "file": "2205.06175_gato.pdf",
+  "summary": "Inspired by progress in large-scale language modeling, we apply a similar approach towards building a single generalist agent beyond the realm of text outputs. The agent, which we refer to as Gato, works as a multi-modal, multi-task, multi-embodiment generalist policy. The same network with the same weights can play Atari, caption images, chat, stack blocks with a real robot arm and much more, deciding based on its context whether to output text, joint torques, button presses, or other tokens. In this report we describe the model and the data, and document the current capabilities of Gato."
+ },
+ {
+  "key": "rt1",
+  "arxiv": "2212.06817",
+  "title": "RT-1: Robotics Transformer for Real-World Control at Scale",
+  "authors": [
+   "Anthony Brohan",
+   "Noah Brown",
+   "Justice Carbajal",
+   "Yevgen Chebotar",
+   "Joseph Dabis",
+   "Chelsea Finn"
+  ],
+  "year": 2022,
+  "published": "2022-12-13",
+  "file": "2212.06817_rt1.pdf",
+  "summary": "By transferring knowledge from large, diverse, task-agnostic datasets, modern machine learning models can solve specific downstream tasks either zero-shot or with small task-specific datasets to a high level of performance. While this capability has been demonstrated in other fields such as computer vision, natural language processing or speech recognition, it remains to be shown in robotics, where the generalization capabilities of the models are particularly critical due to the difficulty of collecting real-world robotic data. We argue that one of the keys to the success of such general robo"
+ },
+ {
+  "key": "rt2",
+  "arxiv": "2307.15818",
+  "title": "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
+  "authors": [
+   "Anthony Brohan",
+   "Noah Brown",
+   "Justice Carbajal",
+   "Yevgen Chebotar",
+   "Xi Chen",
+   "Krzysztof Choromanski"
+  ],
+  "year": 2023,
+  "published": "2023-07-28",
+  "file": "2307.15818_rt2.pdf",
+  "summary": "We study how vision-language models trained on Internet-scale data can be incorporated directly into end-to-end robotic control to boost generalization and enable emergent semantic reasoning. Our goal is to enable a single end-to-end trained model to both learn to map robot observations to actions and enjoy the benefits of large-scale pretraining on language and vision-language data from the web. To this end, we propose to co-fine-tune state-of-the-art vision-language models on both robotic trajectory data and Internet-scale vision-language tasks, such as visual question answering. In contrast"
+ },
+ {
+  "key": "openvla",
+  "arxiv": "2406.09246",
+  "title": "OpenVLA: An Open-Source Vision-Language-Action Model",
+  "authors": [
+   "Moo Jin Kim",
+   "Karl Pertsch",
+   "Siddharth Karamcheti",
+   "Ted Xiao",
+   "Ashwin Balakrishna",
+   "Suraj Nair"
+  ],
+  "year": 2024,
+  "published": "2024-06-13",
+  "file": "2406.09246_openvla.pdf",
+  "summary": "Large policies pretrained on a combination of Internet-scale vision-language data and diverse robot demonstrations have the potential to change how we teach robots new skills: rather than training new behaviors from scratch, we can fine-tune such vision-language-action (VLA) models to obtain robust, generalizable policies for visuomotor control. Yet, widespread adoption of VLAs for robotics has been challenging as 1) existing VLAs are largely closed and inaccessible to the public, and 2) prior work fails to explore methods for efficiently fine-tuning VLAs for new tasks, a key component for ado"
+ },
+ {
+  "key": "octo",
+  "arxiv": "2405.12213",
+  "title": "Octo: An Open-Source Generalist Robot Policy",
+  "authors": [
+   " Octo Model Team",
+   "Dibya Ghosh",
+   "Homer Walke",
+   "Karl Pertsch",
+   "Kevin Black",
+   "Oier Mees"
+  ],
+  "year": 2024,
+  "published": "2024-05-20",
+  "file": "2405.12213_octo.pdf",
+  "summary": "Large policies pretrained on diverse robot datasets have the potential to transform robotic learning: instead of training new policies from scratch, such generalist robot policies may be finetuned with only a little in-domain data, yet generalize broadly. However, to be widely applicable across a range of robotic learning scenarios, environments, and tasks, such policies need to handle diverse sensors and action spaces, accommodate a variety of commonly used robotic platforms, and finetune readily and efficiently to new domains. In this work, we aim to lay the groundwork for developing open-so"
+ },
+ {
+  "key": "pi0",
+  "arxiv": "2410.24164",
+  "title": "$π_0$: A Vision-Language-Action Flow Model for General Robot Control",
+  "authors": [
+   "Kevin Black",
+   "Noah Brown",
+   "Danny Driess",
+   "Adnan Esmail",
+   "Michael Equi",
+   "Chelsea Finn"
+  ],
+  "year": 2024,
+  "published": "2024-10-31",
+  "file": "2410.24164_pi0.pdf",
+  "summary": "Robot learning holds tremendous promise to unlock the full potential of flexible, general, and dexterous robot systems, as well as to address some of the deepest questions in artificial intelligence. However, bringing robot learning to the level of generality required for effective real-world systems faces major obstacles in terms of data, generalization, and robustness. In this paper, we discuss how generalist robot policies (i.e., robot foundation models) can address these challenges, and how we can design effective generalist robot policies for complex and highly dexterous tasks. We propose"
+ },
+ {
+  "key": "pi05",
+  "arxiv": "2504.16054",
+  "title": "$π_{0.5}$: a Vision-Language-Action Model with Open-World Generalization",
+  "authors": [
+   "Physical Intelligence",
+   "Kevin Black",
+   "Noah Brown",
+   "James Darpinian",
+   "Karan Dhabalia",
+   "Danny Driess"
+  ],
+  "year": 2025,
+  "published": "2025-04-22",
+  "file": "2504.16054_pi05.pdf",
+  "summary": "In order for robots to be useful, they must perform practically relevant tasks in the real world, outside of the lab. While vision-language-action (VLA) models have demonstrated impressive results for end-to-end robot control, it remains an open question how far such models can generalize in the wild. We describe $π_{0.5}$, a new model based on $π_{0}$ that uses co-training on heterogeneous tasks to enable broad generalization. $π_{0.5}$\\ uses data from multiple robots, high-level semantic prediction, web data, and other sources to enable broadly generalizable real-world robotic manipulation. "
+ },
+ {
+  "key": "gr00t",
+  "arxiv": "2503.14734",
+  "title": "GR00T N1: An Open Foundation Model for Generalist Humanoid Robots",
+  "authors": [
+   " NVIDIA",
+   " :",
+   "Johan Bjorck",
+   "Fernando Castañeda",
+   "Nikita Cherniadev",
+   "Xingye Da"
+  ],
+  "year": 2025,
+  "published": "2025-03-18",
+  "file": "2503.14734_gr00t.pdf",
+  "summary": "General-purpose robots need a versatile body and an intelligent mind. Recent advancements in humanoid robots have shown great promise as a hardware platform for building generalist autonomy in the human world. A robot foundation model, trained on massive and diverse data sources, is essential for enabling the robots to reason about novel situations, robustly handle real-world variability, and rapidly learn new tasks. To this end, we introduce GR00T N1, an open foundation model for humanoid robots. GR00T N1 is a Vision-Language-Action (VLA) model with a dual-system architecture. The vision-lang"
+ },
+ {
+  "key": "robocat",
+  "arxiv": "2306.11706",
+  "title": "RoboCat: A Self-Improving Generalist Agent for Robotic Manipulation",
+  "authors": [
+   "Konstantinos Bousmalis",
+   "Giulia Vezzani",
+   "Dushyant Rao",
+   "Coline Devin",
+   "Alex X. Lee",
+   "Maria Bauza"
+  ],
+  "year": 2023,
+  "published": "2023-06-20",
+  "file": "2306.11706_robocat.pdf",
+  "summary": "The ability to leverage heterogeneous robotic experience from different robots and tasks to quickly master novel skills and embodiments has the potential to transform robot learning. Inspired by recent advances in foundation models for vision and language, we propose a multi-embodiment, multi-task generalist agent for robotic manipulation. This agent, named RoboCat, is a visual goal-conditioned decision transformer capable of consuming action-labelled visual experience. This data spans a large repertoire of motor control skills from simulated and real robotic arms with varying sets of observat"
+ },
+ {
+  "key": "rdt",
+  "arxiv": "2410.07864",
+  "title": "RDT-1B: a Diffusion Foundation Model for Bimanual Manipulation",
+  "authors": [
+   "Songming Liu",
+   "Lingxuan Wu",
+   "Bangguo Li",
+   "Hengkai Tan",
+   "Huayu Chen",
+   "Zhengyi Wang"
+  ],
+  "year": 2024,
+  "published": "2024-10-10",
+  "file": "2410.07864_rdt.pdf",
+  "summary": "Bimanual manipulation is essential in robotics, yet developing foundation models is extremely challenging due to the inherent complexity of coordinating two robot arms (leading to multi-modal action distributions) and the scarcity of training data. In this paper, we present the Robotics Diffusion Transformer (RDT), a pioneering diffusion foundation model for bimanual manipulation. RDT builds on diffusion models to effectively represent multi-modality, with innovative designs of a scalable Transformer to deal with the heterogeneity of multi-modal inputs and to capture the nonlinearity and high "
+ },
+ {
+  "key": "openx",
+  "arxiv": "2310.08864",
+  "title": "Open X-Embodiment: Robotic Learning Datasets and RT-X Models",
+  "authors": [
+   "Open X-Embodiment Collaboration",
+   "Abby O'Neill",
+   "Abdul Rehman",
+   "Abhinav Gupta",
+   "Abhiram Maddukuri",
+   "Abhishek Gupta"
+  ],
+  "year": 2023,
+  "published": "2023-10-13",
+  "file": "2310.08864_openx.pdf",
+  "summary": "Large, high-capacity models trained on diverse datasets have shown remarkable successes on efficiently tackling downstream applications. In domains from NLP to Computer Vision, this has led to a consolidation of pretrained models, with general pretrained backbones serving as a starting point for many applications. Can such a consolidation happen in robotics? Conventionally, robotic learning methods train a separate model for every application, every robot, and even every environment. Can we instead train generalist X-robot policy that can be adapted efficiently to new robots, tasks, and enviro"
+ },
+ {
+  "key": "droid",
+  "arxiv": "2403.12945",
+  "title": "DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset",
+  "authors": [
+   "Alexander Khazatsky",
+   "Karl Pertsch",
+   "Suraj Nair",
+   "Ashwin Balakrishna",
+   "Sudeep Dasari",
+   "Siddharth Karamcheti"
+  ],
+  "year": 2024,
+  "published": "2024-03-19",
+  "file": "2403.12945_droid.pdf",
+  "summary": "The creation of large, diverse, high-quality robot manipulation datasets is an important stepping stone on the path toward more capable and robust robotic manipulation policies. However, creating such datasets is challenging: collecting robot manipulation data in diverse environments poses logistical and safety challenges and requires substantial investments in hardware and human labour. As a result, even the most general robot manipulation policies today are mostly trained on data collected in a small number of environments with limited scene and task diversity. In this work, we introduce DRO"
+ },
+ {
+  "key": "calvin",
+  "arxiv": "2112.03227",
+  "title": "CALVIN: A Benchmark for Language-Conditioned Policy Learning for Long-Horizon Robot Manipulation Tasks",
+  "authors": [
+   "Oier Mees",
+   "Lukas Hermann",
+   "Erick Rosete-Beas",
+   "Wolfram Burgard"
+  ],
+  "year": 2021,
+  "published": "2021-12-06",
+  "file": "2112.03227_calvin.pdf",
+  "summary": "General-purpose robots coexisting with humans in their environment must learn to relate human language to their perceptions and actions to be useful in a range of daily tasks. Moreover, they need to acquire a diverse repertoire of general-purpose skills that allow composing long-horizon tasks by following unconstrained language instructions. In this paper, we present CALVIN (Composing Actions from Language and Vision), an open-source simulated benchmark to learn long-horizon language-conditioned tasks. Our aim is to make it possible to develop agents that can solve many robotic manipulation ta"
+ },
+ {
+  "key": "libero",
+  "arxiv": "2306.03310",
+  "title": "LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning",
+  "authors": [
+   "Bo Liu",
+   "Yifeng Zhu",
+   "Chongkai Gao",
+   "Yihao Feng",
+   "Qiang Liu",
+   "Yuke Zhu"
+  ],
+  "year": 2023,
+  "published": "2023-06-05",
+  "file": "2306.03310_libero.pdf",
+  "summary": "Lifelong learning offers a promising paradigm of building a generalist agent that learns and adapts over its lifespan. Unlike traditional lifelong learning problems in image and text domains, which primarily involve the transfer of declarative knowledge of entities and concepts, lifelong learning in decision-making (LLDM) also necessitates the transfer of procedural knowledge, such as actions and behaviors. To advance research in LLDM, we introduce LIBERO, a novel benchmark of lifelong learning for robot manipulation. Specifically, LIBERO highlights five key research topics in LLDM: 1) how to "
+ },
+ {
+  "key": "simplerenv",
+  "arxiv": "2405.05941",
+  "title": "Evaluating Real-World Robot Manipulation Policies in Simulation",
+  "authors": [
+   "Xuanlin Li",
+   "Kyle Hsu",
+   "Jiayuan Gu",
+   "Karl Pertsch",
+   "Oier Mees",
+   "Homer Rich Walke"
+  ],
+  "year": 2024,
+  "published": "2024-05-09",
+  "file": "2405.05941_simplerenv.pdf",
+  "summary": "The field of robotics has made significant advances towards generalist robot manipulation policies. However, real-world evaluation of such policies is not scalable and faces reproducibility challenges, which are likely to worsen as policies broaden the spectrum of tasks they can perform. We identify control and visual disparities between real and simulated environments as key challenges for reliable simulated evaluation and propose approaches for mitigating these gaps without needing to craft full-fidelity digital twins of real-world environments. We then employ these approaches to create SIMP"
+ },
+ {
+  "key": "behavior1k",
+  "arxiv": "2403.09227",
+  "title": "BEHAVIOR-1K: A Human-Centered, Embodied AI Benchmark with 1,000 Everyday Activities and Realistic Simulation",
+  "authors": [
+   "Chengshu Li",
+   "Ruohan Zhang",
+   "Josiah Wong",
+   "Cem Gokmen",
+   "Sanjana Srivastava",
+   "Roberto Martín-Martín"
+  ],
+  "year": 2024,
+  "published": "2024-03-14",
+  "file": "2403.09227_behavior1k.pdf",
+  "summary": "We present BEHAVIOR-1K, a comprehensive simulation benchmark for human-centered robotics. BEHAVIOR-1K includes two components, guided and motivated by the results of an extensive survey on \"what do you want robots to do for you?\". The first is the definition of 1,000 everyday activities, grounded in 50 scenes (houses, gardens, restaurants, offices, etc.) with more than 9,000 objects annotated with rich physical and semantic properties. The second is OMNIGIBSON, a novel simulation environment that supports these activities via realistic physics simulation and rendering of rigid bodies, deformab"
+ },
+ {
+  "key": "robocasa",
+  "arxiv": "2406.02523",
+  "title": "RoboCasa: Large-Scale Simulation of Everyday Tasks for Generalist Robots",
+  "authors": [
+   "Soroush Nasiriany",
+   "Abhiram Maddukuri",
+   "Lance Zhang",
+   "Adeet Parikh",
+   "Aaron Lo",
+   "Abhishek Joshi"
+  ],
+  "year": 2024,
+  "published": "2024-06-04",
+  "file": "2406.02523_robocasa.pdf",
+  "summary": "Recent advancements in Artificial Intelligence (AI) have largely been propelled by scaling. In Robotics, scaling is hindered by the lack of access to massive robot datasets. We advocate using realistic physical simulation as a means to scale environments, tasks, and datasets for robot learning methods. We present RoboCasa, a large-scale simulation framework for training generalist robots in everyday environments. RoboCasa features realistic and diverse scenes focusing on kitchen environments. We provide thousands of 3D assets across over 150 object categories and dozens of interactable furnitu"
+ },
+ {
+  "key": "metaworld",
+  "arxiv": "1910.10897",
+  "title": "Meta-World: A Benchmark and Evaluation for Multi-Task and Meta Reinforcement Learning",
+  "authors": [
+   "Tianhe Yu",
+   "Deirdre Quillen",
+   "Zhanpeng He",
+   "Ryan Julian",
+   "Avnish Narayan",
+   "Hayden Shively"
+  ],
+  "year": 2019,
+  "published": "2019-10-24",
+  "file": "1910.10897_metaworld.pdf",
+  "summary": "Meta-reinforcement learning algorithms can enable robots to acquire new skills much more quickly, by leveraging prior experience to learn how to learn. However, much of the current research on meta-reinforcement learning focuses on task distributions that are very narrow. For example, a commonly used meta-reinforcement learning benchmark uses different running velocities for a simulated robot as different tasks. When policies are meta-trained on such narrow task distributions, they cannot possibly generalize to more quickly acquire entirely new tasks. Therefore, if the aim of these methods is "
+ },
+ {
+  "key": "rlbench",
+  "arxiv": "1909.12271",
+  "title": "RLBench: The Robot Learning Benchmark & Learning Environment",
+  "authors": [
+   "Stephen James",
+   "Zicong Ma",
+   "David Rovick Arrojo",
+   "Andrew J. Davison"
+  ],
+  "year": 2019,
+  "published": "2019-09-26",
+  "file": "1909.12271_rlbench.pdf",
+  "summary": "We present a challenging new benchmark and learning-environment for robot learning: RLBench. The benchmark features 100 completely unique, hand-designed tasks ranging in difficulty, from simple target reaching and door opening, to longer multi-stage tasks, such as opening an oven and placing a tray in it. We provide an array of both proprioceptive observations and visual observations, which include rgb, depth, and segmentation masks from an over-the-shoulder stereo camera and an eye-in-hand monocular camera. Uniquely, each task comes with an infinite supply of demos through the use of motion p"
+ },
+ {
+  "key": "robomind",
+  "arxiv": "2412.13877",
+  "title": "RoboMIND: Benchmark on Multi-embodiment Intelligence Normative Data for Robot Manipulation",
+  "authors": [
+   "Kun Wu",
+   "Chengkai Hou",
+   "Jiaming Liu",
+   "Zhengping Che",
+   "Xiaozhu Ju",
+   "Zhuqin Yang"
+  ],
+  "year": 2024,
+  "published": "2024-12-18",
+  "file": "2412.13877_robomind.pdf",
+  "summary": "In this paper, we introduce RoboMIND (Multi-embodiment Intelligence Normative Data for Robot Manipulation), a dataset containing 107k demonstration trajectories across 479 diverse tasks involving 96 object classes. RoboMIND is collected through human teleoperation and encompasses comprehensive robotic-related information, including multi-view observations, proprioceptive robot state information, and linguistic task descriptions. To ensure data consistency and reliability for imitation learning, RoboMIND is built on a unified data collection platform and a standardized protocol, covering four d"
+ },
+ {
+  "key": "vjepa",
+  "arxiv": "2404.08471",
+  "title": "Revisiting Feature Prediction for Learning Visual Representations from Video",
+  "authors": [
+   "Adrien Bardes",
+   "Quentin Garrido",
+   "Jean Ponce",
+   "Xinlei Chen",
+   "Michael Rabbat",
+   "Yann LeCun"
+  ],
+  "year": 2024,
+  "published": "2024-02-15",
+  "file": "2404.08471_vjepa.pdf",
+  "summary": "This paper explores feature prediction as a stand-alone objective for unsupervised learning from video and introduces V-JEPA, a collection of vision models trained solely using a feature prediction objective, without the use of pretrained image encoders, text, negative examples, reconstruction, or other sources of supervision. The models are trained on 2 million videos collected from public datasets and are evaluated on downstream image and video tasks. Our results show that learning by predicting video features leads to versatile visual representations that perform well on both motion and app"
+ },
+ {
+  "key": "genie",
+  "arxiv": "2402.15391",
+  "title": "Genie: Generative Interactive Environments",
+  "authors": [
+   "Jake Bruce",
+   "Michael Dennis",
+   "Ashley Edwards",
+   "Jack Parker-Holder",
+   "Yuge Shi",
+   "Edward Hughes"
+  ],
+  "year": 2024,
+  "published": "2024-02-23",
+  "file": "2402.15391_genie.pdf",
+  "summary": "We introduce Genie, the first generative interactive environment trained in an unsupervised manner from unlabelled Internet videos. The model can be prompted to generate an endless variety of action-controllable virtual worlds described through text, synthetic images, photographs, and even sketches. At 11B parameters, Genie can be considered a foundation world model. It is comprised of a spatiotemporal video tokenizer, an autoregressive dynamics model, and a simple and scalable latent action model. Genie enables users to act in the generated environments on a frame-by-frame basis despite train"
+ },
+ {
+  "key": "unisim",
+  "arxiv": "2310.06114",
+  "title": "Learning Interactive Real-World Simulators",
+  "authors": [
+   "Sherry Yang",
+   "Yilun Du",
+   "Kamyar Ghasemipour",
+   "Jonathan Tompson",
+   "Leslie Kaelbling",
+   "Dale Schuurmans"
+  ],
+  "year": 2023,
+  "published": "2023-10-09",
+  "file": "2310.06114_unisim.pdf",
+  "summary": "Generative models trained on internet data have revolutionized how text, image, and video content can be created. Perhaps the next milestone for generative models is to simulate realistic experience in response to actions taken by humans, robots, and other interactive agents. Applications of a real-world simulator range from controllable content creation in games and movies, to training embodied agents purely in simulation that can be directly deployed in the real world. We explore the possibility of learning a universal simulator (UniSim) of real-world interaction through generative modeling."
+ },
+ {
+  "key": "cosmos",
+  "arxiv": "2501.03575",
+  "title": "Cosmos World Foundation Model Platform for Physical AI",
+  "authors": [
+   " NVIDIA",
+   " :",
+   "Niket Agarwal",
+   "Arslan Ali",
+   "Maciej Bala",
+   "Yogesh Balaji"
+  ],
+  "year": 2025,
+  "published": "2025-01-07",
+  "file": "2501.03575_cosmos.pdf",
+  "summary": "Physical AI needs to be trained digitally first. It needs a digital twin of itself, the policy model, and a digital twin of the world, the world model. In this paper, we present the Cosmos World Foundation Model Platform to help developers build customized world models for their Physical AI setups. We position a world foundation model as a general-purpose world model that can be fine-tuned into customized world models for downstream applications. Our platform covers a video curation pipeline, pre-trained world foundation models, examples of post-training of pre-trained world foundation models,"
+ },
+ {
+  "key": "blink",
+  "arxiv": "2404.12390",
+  "title": "BLINK: Multimodal Large Language Models Can See but Not Perceive",
+  "authors": [
+   "Xingyu Fu",
+   "Yushi Hu",
+   "Bangzheng Li",
+   "Yu Feng",
+   "Haoyu Wang",
+   "Xudong Lin"
+  ],
+  "year": 2024,
+  "published": "2024-04-18",
+  "file": "2404.12390_blink.pdf",
+  "summary": "We introduce Blink, a new benchmark for multimodal language models (LLMs) that focuses on core visual perception abilities not found in other evaluations. Most of the Blink tasks can be solved by humans \"within a blink\" (e.g., relative depth estimation, visual correspondence, forensics detection, and multi-view reasoning). However, we find these perception-demanding tasks cast significant challenges for current multimodal LLMs because they resist mediation through natural language. Blink reformats 14 classic computer vision tasks into 3,807 multiple-choice questions, paired with single or mult"
+ },
+ {
+  "key": "rrtstar",
+  "arxiv": "1105.1186",
+  "title": "Sampling-based Algorithms for Optimal Motion Planning",
+  "authors": [
+   "Sertac Karaman",
+   "Emilio Frazzoli"
+  ],
+  "year": 2011,
+  "published": "2011-05-05",
+  "file": "1105.1186_rrtstar.pdf",
+  "summary": "During the last decade, sampling-based path planning algorithms, such as Probabilistic RoadMaps (PRM) and Rapidly-exploring Random Trees (RRT), have been shown to work well in practice and possess theoretical guarantees such as probabilistic completeness. However, little effort has been devoted to the formal analysis of the quality of the solution returned by such algorithms, e.g., as a function of the number of samples. The purpose of this paper is to fill this gap, by rigorously analyzing the asymptotic behavior of the cost of the solution returned by stochastic sampling-based algorithms as "
+ },
+ {
+  "key": "embodied_survey",
+  "arxiv": "2103.04918",
+  "title": "A Survey of Embodied AI: From Simulators to Research Tasks",
+  "authors": [
+   "Jiafei Duan",
+   "Samson Yu",
+   "Hui Li Tan",
+   "Hongyuan Zhu",
+   "Cheston Tan"
+  ],
+  "year": 2021,
+  "published": "2021-03-08",
+  "file": "2103.04918_embodied_survey.pdf",
+  "summary": "There has been an emerging paradigm shift from the era of \"internet AI\" to \"embodied AI\", where AI algorithms and agents no longer learn from datasets of images, videos or text curated primarily from the internet. Instead, they learn through interactions with their environments from an egocentric perception similar to humans. Consequently, there has been substantial growth in the demand for embodied AI simulators to support various embodied AI research tasks. This growing interest in embodied AI is beneficial to the greater pursuit of Artificial General Intelligence (AGI), but there has not be"
+ },
+ {
+  "key": "foundation_robot_survey",
+  "arxiv": "2312.07843",
+  "title": "Foundation Models in Robotics: Applications, Challenges, and the Future",
+  "authors": [
+   "Roya Firoozi",
+   "Johnathan Tucker",
+   "Stephen Tian",
+   "Anirudha Majumdar",
+   "Jiankai Sun",
+   "Weiyu Liu"
+  ],
+  "year": 2023,
+  "published": "2023-12-13",
+  "file": "2312.07843_foundation_robot_survey.pdf",
+  "summary": "We survey applications of pretrained foundation models in robotics. Traditional deep learning models in robotics are trained on small datasets tailored for specific tasks, which limits their adaptability across diverse applications. In contrast, foundation models pretrained on internet-scale data appear to have superior generalization capabilities, and in some instances display an emergent ability to find zero-shot solutions to problems that are not present in the training data. Foundation models may hold the potential to enhance various components of the robot autonomy stack, from perception "
+ },
+ {
+  "key": "data_scaling",
+  "arxiv": "2410.18647",
+  "title": "Data Scaling Laws in Imitation Learning for Robotic Manipulation",
+  "authors": [
+   "Fanqi Lin",
+   "Yingdong Hu",
+   "Pingyue Sheng",
+   "Chuan Wen",
+   "Jiacheng You",
+   "Yang Gao"
+  ],
+  "year": 2024,
+  "published": "2024-10-24",
+  "file": "2410.18647_data_scaling.pdf",
+  "summary": "Data scaling has revolutionized fields like natural language processing and computer vision, providing models with remarkable generalization capabilities. In this paper, we investigate whether similar data scaling laws exist in robotics, particularly in robotic manipulation, and whether appropriate data scaling can yield single-task robot policies that can be deployed zero-shot for any object within the same category in any environment. To this end, we conduct a comprehensive empirical study on data scaling in imitation learning. By collecting data across numerous environments and objects, we "
+ },
+ {
+  "key": "umi",
+  "arxiv": "2402.10329",
+  "title": "Universal Manipulation Interface: In-The-Wild Robot Teaching Without In-The-Wild Robots",
+  "authors": [
+   "Cheng Chi",
+   "Zhenjia Xu",
+   "Chuer Pan",
+   "Eric Cousineau",
+   "Benjamin Burchfiel",
+   "Siyuan Feng"
+  ],
+  "year": 2024,
+  "published": "2024-02-15",
+  "file": "2402.10329_umi.pdf",
+  "summary": "We present Universal Manipulation Interface (UMI) -- a data collection and policy learning framework that allows direct skill transfer from in-the-wild human demonstrations to deployable robot policies. UMI employs hand-held grippers coupled with careful interface design to enable portable, low-cost, and information-rich data collection for challenging bimanual and dynamic manipulation demonstrations. To facilitate deployable policy learning, UMI incorporates a carefully designed policy interface with inference-time latency matching and a relative-trajectory action representation. The resultin"
+ },
+ {
+  "key": "lerobot",
+  "arxiv": "2602.22818",
+  "title": "LeRobot: An Open-Source Library for End-to-End Robot Learning",
+  "authors": [
+   "Remi Cadene",
+   "Simon Aliberts",
+   "Francesco Capuano",
+   "Michel Aractingi",
+   "Adil Zouitine",
+   "Pepijn Kooijmans"
+  ],
+  "year": 2026,
+  "published": "2026-02-26",
+  "file": "2602.22818_lerobot.pdf",
+  "summary": "Robotics is undergoing a significant transformation powered by advances in high-level control techniques based on machine learning, giving rise to the field of robot learning. Recent progress in robot learning has been accelerated by the increasing availability of affordable teleoperation systems, large-scale openly available datasets, and scalable learning-based methods. However, development in the field of robot learning is often slowed by fragmented, closed-source tools designed to only address specific sub-components within the robotics stack. In this paper, we present \\texttt{lerobot}, an"
+ }
+]

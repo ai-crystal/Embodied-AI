@@ -1,0 +1,13 @@
+# 本地私有内容：写作规范、大纲、论文资料、构建中间产物、封面素材
+_private/
+papers/
+
+# 构建中间产物
+book/.build/
+*.pyc
+__pycache__/
+*.part
+
+# 系统文件
+Thumbs.db
+.DS_Store
