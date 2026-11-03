@@ -35,7 +35,7 @@ def fig_pid():
     branches = [
         (4.62, "P　比例", "$K_p\\,e$", "差多少推多少", fs.ACCENT),
         (2.62, "I　积分", "$K_i\\!\\int\\! e\\,dt$", "攒掉最后一点残差", fs.BLUE),
-        (0.62, "D　微分", "$K_d\dot{e}$", "看趋势提前刹车", fs.GREEN),
+        (0.62, "D　微分", r"$K_d\dot{e}$", "看趋势提前刹车", fs.GREEN),
     ]
     centers = []
     for y, name, formula, role, col in branches:
@@ -45,7 +45,7 @@ def fig_pid():
         ax.text(bx + bw / 2, y + bh / 2 - 0.02, formula, ha="center", va="center",
                 fontsize=9.4, color=fs.INK, zorder=5)
         ax.text(bx + bw / 2, y + 0.20, role, ha="center", va="center",
-                fontsize=8.2, color=fs.MUTED, zorder=5)
+                fontsize=7.6, color=fs.MUTED, zorder=5)
         centers.append(y + bh / 2)
 
     # 分支入口与出口
