@@ -11,3 +11,7 @@ __pycache__/
 # 系统文件
 Thumbs.db
 .DS_Store
+
+# 临时文件
+output/*.txt
+output/*.png
