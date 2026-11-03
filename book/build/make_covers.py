@@ -86,6 +86,17 @@ h2{{font-size:40px;line-height:1.42;letter-spacing:3px;font-weight:600;color:#FB
   color:rgba(214,236,240,.55);}}
 """
 
+ART_URL = art("logo_front.png")
+
+ART_HTML = f"""<!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}
+.bg{{background-image:url("{ART_URL}");background-position:26% 52%;}}
+.scrim{{background:
+  linear-gradient(100deg, rgba(4,12,11,.86) 0%, rgba(4,12,11,.62) 40%, rgba(4,12,11,.34) 70%, rgba(4,12,11,.24) 100%),
+  linear-gradient(180deg, rgba(4,12,11,.70) 0%, rgba(4,12,11,.16) 32%, rgba(4,12,11,.34) 64%, rgba(3,9,9,.88) 100%);}}
+</style></head><body><div class="page">
+  <div class="bg"></div><div class="scrim"></div><div class="frame"></div>
+</div></body></html>"""
+
 FRONT = f"""<!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}
 .bg{{background-image:url("{art('logo_front.png')}");background-position:26% 52%;}}
 .scrim{{background:
@@ -160,7 +171,8 @@ def main():
                 print("launch fail", kw.get("channel", "bundled"), str(e)[:80])
         if b is None:
             raise SystemExit("没有可用的 Chromium/Chrome/Edge")
-        for name, html in (("cover_front.jpg", FRONT), ("cover_back.jpg", BACK)):
+        for name, html in (("cover_front.jpg", FRONT), ("cover_back.jpg", BACK),
+                           ("cover-art.jpg", ART_HTML)):
             pg = b.new_page(viewport={"width": W, "height": H}, device_scale_factor=3)
             pg.set_content(html, wait_until="load")
             pg.evaluate("document.fonts.ready")

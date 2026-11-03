@@ -6,6 +6,10 @@
 
 作者：**Dr. Dezeming**　·　2026 年 · 第一版
 
+> 📖 **在线阅读**：<https://ai-crystal.github.io/Embodied-AI/>
+>
+> 每章一个独立链接，例如 `https://ai-crystal.github.io/Embodied-AI/#/book/chapters/ch07`
+
 [开始阅读](book/chapters/ch01.md)　·　<a href="output/embodied-ai.pdf" target="_blank" rel="noopener">下载 PDF</a>
 
 ![封面](book/images/cover/cover_front.jpg)
