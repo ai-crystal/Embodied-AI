@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <meta name="description" content="《具身智能技术》——从大模型到机器人：感知、学习与行动。在线免费阅读，可下载 PDF。">
+  <meta name="description" content="《具身智能技术》系列：入门篇与系统篇。在线免费阅读，可下载 PDF。">
   <title>具身智能技术 · Embodied Intelligence</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/themes/vue.css">
@@ -25,22 +25,22 @@
     .markdown-section img { max-width: 100%; }
     .markdown-section figure { margin: 1.4em 0; text-align: center; }
     .markdown-section figcaption { font-size: .86rem; color: #6b7280; margin-top: .5em; }
-    .markdown-section table { font-size: .9rem; }
+    .markdown-section table { font-size: .9rem; display: table; width: 100%; }
     .katex-display { overflow-x: auto; overflow-y: hidden; padding: .2em 0; }
     .app-nav { margin-right: 12px; }
 
     section.cover {
       background-color: #07110f !important;
-      background-image: url(book/images/cover/cover-art.jpg) !important;
+      background-image: url(books/intro/images/cover-art.jpg) !important;
       background-size: cover !important;
-      background-position: 34% 55% !important;
+      background-position: 50% 46% !important;
       background-repeat: no-repeat !important;
       color: #f2f8f6;
     }
     section.cover::before {
       content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(100deg, rgba(4,12,11,.94) 0%, rgba(4,12,11,.74) 45%,
-                  rgba(4,12,11,.42) 75%, rgba(4,12,11,.28) 100%);
+      background: linear-gradient(100deg, rgba(4,12,11,.94) 0%, rgba(4,12,11,.76) 45%,
+                  rgba(4,12,11,.44) 76%, rgba(4,12,11,.30) 100%);
     }
     section.cover .cover-main { position: relative; z-index: 1; }
     section.cover .cover-main h1,
@@ -50,8 +50,8 @@
     section.cover .cover-main blockquote { color: rgba(236,246,246,.92); border-left: none; }
     section.cover .cover-main p { color: rgba(226,240,240,.88); }
     section.cover .cover-main > p:last-child a {
-      border-radius: 4px; padding: .7em 2.2em; font-size: 1rem;
-      border: 1px solid rgba(233,178,107,.75); color: #fff;
+      border-radius: 4px; padding: .7em 2.2em; font-size: 1rem; margin: 6px 4px;
+      border: 1px solid rgba(242,193,78,.75); color: #fff;
       background: rgba(21,94,117,.62); transition: background .2s;
     }
     section.cover .cover-main > p:last-child a:hover { background: rgba(21,94,117,.95); }
@@ -61,7 +61,7 @@
   <div id="app">正在加载…</div>
 
   <script>
-    // 静态文件（PDF 等）不走 hash 路由，避免请求 xxx.pdf.md 而 404
+    // 静态文件（PDF 等）不走 hash 路由
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href^="#/"]');
       if (!a) return;
@@ -79,14 +79,14 @@
       subMaxLevel: 2,
       coverpage: true,
       onlyCover: false,
-      alias: { '.*/_sidebar.md': '/_sidebar.md' },
       auto2top: true,
       maxLevel: 3,
+      // 站内链接统一写仓库绝对路径；各册目录下各放一份 _sidebar.md，docsify 会自动就近加载
       search: {
-        placeholder: '搜索本书…',
+        placeholder: '搜索全系列…',
         noData: '没有找到结果',
         depth: 3,
-        paths: ['/', '/book/chapters/', '/book/front/', '/book/appendix/']
+        paths: ['/', '/books/intro/', '/books/system/']
       },
       pagination: {
         previousText: '上一章',
@@ -102,11 +102,17 @@
       mermaid: { theme: 'default' },
       plugins: [
         function (hook, vm) {
-          // 正文图片写 ../images/NN/xxx.png（GitHub 直接看 md 也能显示），
-          // 在 docsify 里改写成站点根下的绝对路径。
           hook.afterEach(function (html) {
-            var base = new URL('.', location.href).pathname;
-            html = html.replace(/(src=")\.\.\/images\//g, '$1' + base + 'book/images/');
+            try {
+              var base = new URL('.', location.href).pathname;    // '/' 或 '/<repo>/'
+              var path = (vm && vm.route && vm.route.path) || decodeURIComponent(location.hash || '');
+              var m = path.match(/books\/([^\/]+)\//);
+              var vol = m ? m[1] : '';
+              if (vol) {
+                html = html.replace(/(src=")\.\.\/images\//g,
+                                    '$1' + base + 'books/' + vol + '/images/');
+              }
+            } catch (e) { /* 保守起见不阻断渲染 */ }
             return html;
           });
           hook.doneEach(function () {

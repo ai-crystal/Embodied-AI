@@ -1,9 +1,11 @@
 # 具身智能技术
 
-> 从大模型到机器人：感知、学习与行动
+> 一套书，两种读法：入门篇讲链路，系统篇讲层
 
-**让会说话的大脑，学会用手做事。**
+**先看懂一件事，再判断它到底行不行。**
 
 Dr. Dezeming　·　2026 年 · 第一版
 
-[开始阅读](book/chapters/ch01.md)　<a href="output/embodied-ai.pdf" target="_blank" rel="noopener">下载 PDF</a>
+系统篇另有 [在线阅读](books/system/chapters/ch01.md) 与 [PDF 下载](output/embodied-system.pdf)。
+
+[从入门篇开始](books/intro/chapters/ch01.md)　<a href="output/embodied-intro.pdf" target="_blank" rel="noopener">下载入门篇 PDF</a>
