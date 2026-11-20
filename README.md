@@ -14,7 +14,7 @@
 
 | 册 | 一句话 | 篇幅 | 在线阅读 | PDF |
 |---|---|---|---|---|
-| **入门篇**　从零开始，看懂机器怎么动手 | 十二个环节，每个给直觉、数字与失败场景，读完能看懂论文、能判断演示 | 18 章 + 2 附录，153 页 | [开始阅读](books/intro/README.md) | <a href="output/embodied-intro.pdf" target="_blank" rel="noopener">下载</a> |
+| **入门篇**　从零开始，看懂机器怎么动手 | 十二个环节，每个给直觉、数字与失败场景，读完能看懂论文、能判断演示 | 18 章 + 2 附录，156 页 | [开始阅读](books/intro/README.md) | <a href="output/embodied-intro.pdf" target="_blank" rel="noopener">下载</a> |
 | **系统篇**　从大模型到机器人 | 同一批技术的推导、论文脉络与工程细节，适合当参考书 | 21 章 + 4 附录，205 页 | [开始阅读](books/system/README.md) | <a href="output/embodied-system.pdf" target="_blank" rel="noopener">下载</a> |
 
 ## 怎么选

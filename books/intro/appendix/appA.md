@@ -1,6 +1,6 @@
 # 附录 A　术语表
 
-按主题分组，每组内按中文拼音排序。第三列是一句话说明，够用就行；想看完整推导，顺着附录 B 的论文读原文。
+按主题分组，同一主题的词放在一起，方便对照。第三列是一句话说明，够用就行；想看完整推导，顺着附录 B 的论文读原文。
 
 ## A.1　身体与机构
 
@@ -46,6 +46,11 @@
 | 针孔模型 | pinhole model | 最基本的透视投影模型，一个像素对应一条射线 |
 | 占据栅格 | occupancy grid | 每个格子记“被占据的概率”，规划器最常用的地图 |
 | 主点 | principal point | 光轴与像平面的交点，内参里的 cx、cy |
+| 神经辐射场 | neural radiance field（NeRF） | 用一个小网络记住整个场景的密度与颜色，可从新视角渲染 |
+| 高斯泼溅 | 3D Gaussian splatting（3DGS） | 用上百万个带朝向的椭球表示场景，渲染快，编辑也方便 |
+| 体渲染 | volume rendering | 沿光线累加颜色与不透明度，NeRF 与 3DGS 都用它出图 |
+| 语义场 | semantic field | 每个体素或椭球挂一个语言特征向量，可以用一句话查位置 |
+| 数字孪生 | digital twin | 把真实场景扫进仿真，得到一份可反复练手的副本 |
 
 ## A.3　位姿与抓取
 
@@ -61,6 +66,9 @@
 | 对称等价解 | symmetric ambiguity | 对称物体转一个角度看起来一样，位姿不唯一 |
 | 抓取位姿 | grasp pose | 夹爪接近物体时的位置与朝向 |
 | 抓取矩形 | grasp rectangle | 2D 抓取的五元组表示（中心、角度、开度、质量） |
+| 形闭合 | form closure | 靠几何包围卡住物体，摩擦为零也不脱手 |
+| 接触点 | contact point | 手指或夹爪与物体真正接触的位置，抓取分析的起点 |
+| 抓取矩阵 | grasp matrix | 把接触力映射成物体合力的矩阵，判断能不能顶住外力 |
 
 ## A.4　学习与仿真
 
@@ -107,3 +115,36 @@
 | 置信区间 | confidence interval | 估计值的不确定范围，20 次试验时宽得吓人 |
 | 中间件 | middleware | 让几十个程序互相传数据的软件层，ROS 2 是代表 |
 | 抓取检测 | grasp detection | 从图像或点云直接给出抓取位姿的模块 |
+
+## A.6　规划、控制与身体
+
+| 中文 | 英文 | 一句话说明 |
+|---|---|---|
+| 构型空间障碍 | configuration space obstacle | 机器人任何部位碰到障碍时，对应的那一片关节角区域 |
+| 膨胀 | inflation | 把障碍按机器人半径放大一圈，把"面接触"简化成"点不能进" |
+| 路径规划 | path planning | 只关心几何上走不走得通，不关心速度和力 |
+| 轨迹优化 | trajectory optimization | 在满足速度、加速度约束的前提下把路径磨光滑 |
+| 快速扩展随机树 | rapidly-exploring random tree（RRT） | 在空间里随机撒点连成树，找到一条可行路径就停 |
+| 概率路线图 | probabilistic roadmap（PRM） | 先撒点建一张图，之后在图上反复查路径 |
+| A 星 | A* | 带启发式的图搜索，估计到终点的距离来少走弯路 |
+| 模型预测控制 | model predictive control（MPC） | 每几十毫秒用模型往前推演一遍，只执行第一步 |
+| 任务与运动规划 | task and motion planning（TAMP） | 上层定先做什么后做什么，下层定怎么走过去，两层交替 |
+| 全身控制 | whole-body control（WBC） | 把平衡、手部任务、安全约束放进一个优化里分配力矩 |
+| 零力矩点 | zero moment point（ZMP） | 地面反力合力矩为零的点，落在支撑多边形内才不会翻 |
+| 线性倒立摆模型 | linear inverted pendulum model（LIPM） | 把行走简化成一个质点在可伸缩腿上前后摆 |
+| 阻抗控制 | impedance control | 让末端表现得像弹簧加阻尼，碰到东西会退让而不是硬顶 |
+| 力控 | force control | 直接控制接触力的大小，装配、打磨、擦桌子都要用 |
+| 触觉 | tactile sensing | 接触处的压力、形变与滑动，视觉看不到的那部分 |
+| 视触觉 | vision-based tactile sensing | 用相机拍弹性体的形变，把"手感"变成一张彩色图 |
+
+## A.7　产业与落地
+
+| 中文 | 英文 | 一句话说明 |
+|---|---|---|
+| 本体 | robot body / hardware platform | 机械结构与驱动、传感、算力的整机，不含算法 |
+| 系统集成 | system integration | 把本体、相机、算法、工位拼成能连续跑的一套东西 |
+| 场景运营 | deployment operation | 上线之后的运维、标定、数据回流与人工兜底 |
+| 投资回收期 | payback period | 省下的人力与投入的成本相抵要多久 |
+| 平均无故障时间 | mean time between failures（MTBF） | 两次故障之间的平均运行时长，衡量能不能连续跑 |
+| 数据飞轮 | data flywheel | 部署越多、数据越多、模型越好，再带来更多部署 |
+| 演示 | demo | 一次成功或一段剪辑过的视频，不等于能连续运行 |

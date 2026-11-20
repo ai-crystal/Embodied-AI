@@ -8,12 +8,15 @@
 - **Segment Anything**（Alexander Kirillov, Eric Mintun, Nikhila Ravi, et al.，2023）。提示式分割的代表作。给一个点或一个框就能切出物体，是机器人感知流水线里最常用的一块。 arXiv:2304.02643
 - **Depth Anything: Unleashing the Power of Large-Scale Unlabeled Data**（Lihe Yang, Bingyi Kang, Zilong Huang, et al.，2024）。单目深度估计的转折点。读它能知道“只有 RGB 也能估深度”做到了什么程度，以及哪里不可靠。 arXiv:2401.10891
 - **ORB-SLAM2: an Open-Source SLAM System for Monocular, Stereo and RGB-D Cameras**（Raul Mur-Artal, Juan D. Tardos，2016）。经典视觉 SLAM 的教科书级实现。前端跟踪、后端优化、回环检测三件事讲得最清楚。 arXiv:1610.06475
+- **NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis**（Ben Mildenhall, Pratul P. Srinivasan, Matthew Tancik, et al.，2020）。想弄明白“几张照片怎么重建整个房间”，从它开始。方法本身已经很少直接用于机器人，但“可微渲染”这个思路是后面所有工作的起点。 arXiv:2003.08934
+- **3D Gaussian Splatting for Real-Time Radiance Field Rendering**（Bernhard Kerbl, Georgios Kopanas, Thomas Leimkühler, et al.，2023）。实时渲染这一代的主力。读它是为了知道“为什么扫一个房间只要几分钟、还能上百帧”，以及显存为什么吃紧。 arXiv:2308.04079
 
 ## B.2　位姿与抓取
 
 - **PVNet: Pixel-wise Voting Network for 6DoF Pose Estimation**（Sida Peng, Yuan Liu, Qixing Huang, et al.，2018）。关键点投票路线，用像素投出关键点再解位姿。理解“遮挡下为什么还能估准”的好例子。 arXiv:1812.11788
 - **FoundationPose: Unified 6D Pose Estimation and Tracking of Novel Objects**（Bowen Wen, Wei Yang, Jan Kautz, et al.，2023）。把基础模型用到 6D 位姿上，给 CAD 或少量参考图就能用，不用为每个物体训练。 arXiv:2312.08344
 - **Contact-GraspNet: Efficient 6-DoF Grasp Generation in Cluttered Scenes**（Martin Sundermeyer, Arsalan Mousavian, Rudolph Triebel, et al.，2021）。6-DoF 抓取生成的常用基线，把抓取预测成接触点，读完能理解平行夹爪为什么只需两个点。 arXiv:2103.14127
+- **DexGraspNet: A Large-Scale Robotic Dexterous Grasp Dataset for General Objects Based on Simulation**（Ruicheng Wang, Jialiang Zhang, Jiayi Chen, et al.，2022）。多指抓取的数据集与方法，想知道“灵巧手怎么抓”，从它的抓取分类与力闭合标签看起。 arXiv:2210.02697
 
 ## B.3　学习与仿真
 
@@ -26,7 +29,20 @@
 - **Isaac Gym: High Performance GPU-Based Physics Simulation For Robot Learning**（Viktor Makoviychuk, Lukasz Wawrzyniak, Yunrong Guo, et al.，2021）。GPU 并行仿真的分水岭。读完能理解“几千个环境同时跑”为什么改变了训练周期。 arXiv:2108.10470
 - **Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World**（Josh Tobin, Rachel Fong, Alex Ray, et al.，2017）。域随机化的经典论文，用纯仿真训练把策略搬到真机。只讲一个技巧，但讲透了。 arXiv:1703.06907
 
-## B.4　大模型与机器人
+## B.4　规划与世界模型
+
+- **Sampling-based Algorithms for Optimal Motion Planning**（Sertac Karaman, Emilio Frazzoli，2011）。采样式规划的理论底子。不必读完全部证明，看前几节的“概率完备”与“渐进最优”就够理解 RRT 与 RRT* 的差别。 arXiv:1105.1186
+- **Genie: Generative Interactive Environments**（Jake Bruce, Michael Dennis, Ashley Edwards, et al.，2024）。从无标注视频里学一个可交互的世界模型。读它能知道“动作条件”是怎么加进视频生成的。 arXiv:2402.15391
+- **Learning Interactive Real-World Simulators**（Sherry Yang, Yilun Du, Kamyar Ghasemipour, et al.，2023）。用真实视频训练“可交互模拟器”的代表作，也把这类模型的幻觉问题写得很直白。 arXiv:2310.06114
+- **Revisiting Feature Prediction for Learning Visual Representations from Video**（Adrien Bardes, Quentin Garrido, Jean Ponce, et al.，2024）。在表征空间做预测，而不是逐像素生成。想理解“为什么可以不算像素”读这一篇。 arXiv:2404.08471
+
+## B.5　身体与触觉
+
+- **Real-World Humanoid Locomotion with Reinforcement Learning**（Ilija Radosavovic, Tete Xiao, Bike Zhang, et al.，2023）。真实人形机器人上用 Transformer 学行走，策略 50 Hz、关节 PD 1 kHz 这类工程数字很有参考价值。 arXiv:2303.03381
+- **Robot Parkour Learning**（Ziwen Zhuang, Zipeng Fu, Jianren Wang, et al.，2023）。四足跑酷，爬高台、跨沟、钻低栏。看它怎么用深度图和课程学习，以及延迟对成功率的影响。 arXiv:2309.05665
+
+## B.6　大模型与机器人
+
 
 - **Do As I Can, Not As I Say: Grounding Language in Robotic Affordances**（Michael Ahn, Anthony Brohan, Noah Brown, et al.，2022）。把语言模型接到技能库上的第一代做法。可行性与合理性相乘的思路，后来被反复借用。 arXiv:2204.01691
 - **VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models**（Wenlong Huang, Chen Wang, Ruohan Zhang, et al.，2023）。把语言变成三维价值场，再用规划跟随。理解“语言怎么落到空间”最直观的一篇。 arXiv:2307.05973
@@ -35,7 +51,7 @@
 - **π_0: A Vision-Language-Action Flow Model for General Robot Control**（Kevin Black, Noah Brown, Danny Driess, et al.，2024）。flow matching 动作头与 50 Hz 控制的代表。读它能理解为什么“动作要一段一段出”。 arXiv:2410.24164
 - **GR00T N1: An Open Foundation Model for Generalist Humanoid Robots**（ NVIDIA,  :, Johan Bjorck, et al.，2025）。双系统思路的代表，慢的语义模型加快的动作模型，人形场景的工程取舍写得很清楚。 arXiv:2503.14734
 
-## B.5　数据、基准与综述
+## B.7　数据、基准与综述
 
 - **Open X-Embodiment: Robotic Learning Datasets and RT-X Models**（Open X-Embodiment Collaboration, Abby O'Neill, Abdul Rehman, et al.，2023）。22 种本体、百万级轨迹的合集。想理解“跨本体数据为什么难统一”，读它的数据表。 arXiv:2310.08864
 - **DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset**（Alexander Khazatsky, Karl Pertsch, Suraj Nair, et al.，2024）。在真实办公室与家庭里采的数据集，采集流程与失败样本的处理值得细看。 arXiv:2403.12945
@@ -44,3 +60,5 @@
 - **Evaluating Real-World Robot Manipulation Policies in Simulation**（Xuanlin Li, Kyle Hsu, Jiayuan Gu, et al.，2024）。把真机策略搬进仿真评测的尝试，讨论“仿真分数能不能代表真机”最认真的一篇。 arXiv:2405.05941
 - **BLINK: Multimodal Large Language Models Can See but Not Perceive**（Xingyu Fu, Yushi Hu, Bangzheng Li, et al.，2024）。揭示多模态模型“看得见但看不懂”的评测。空间类题目上的差距一目了然。 arXiv:2404.12390
 - **A Survey of Embodied AI: From Simulators to Research Tasks**（Jiafei Duan, Samson Yu, Hui Li Tan, et al.，2021）。综述，适合当索引。读完前面的正文再翻它，能把论文摆到正确的位置上。 arXiv:2103.04918
+- **Data Scaling Laws in Imitation Learning for Robotic Manipulation**（Fanqi Lin, Yingdong Hu, Pingyue Sheng, et al.，2024）。讲清楚“数据该往哪花”：多环境少条数，比单环境堆数量有效。做数据预算前先读它。 arXiv:2410.18647
+- **Foundation Models in Robotics: Applications, Challenges, and the Future**（Roya Firoozi, Johnathan Tucker, Stephen Tian, et al.，2023）。把基础模型在机器人里的用法系统梳理了一遍，适合当索引查。 arXiv:2312.07843
