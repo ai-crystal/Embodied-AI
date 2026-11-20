@@ -82,6 +82,10 @@
       auto2top: true,
       maxLevel: 3,
       // 站内链接统一写仓库绝对路径；各册目录下各放一份 _sidebar.md，docsify 会自动就近加载
+      // 各册目录下没有单独的 _sidebar.md，指向本册侧栏，避免 404 与一次无谓的请求
+      alias: {
+        '/books/([^/]+)/(chapters|front|appendix)/_sidebar.md': '/books/$1/_sidebar.md'
+      },
       search: {
         placeholder: '搜索全系列…',
         noData: '没有找到结果',
