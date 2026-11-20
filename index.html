@@ -116,6 +116,8 @@
                 html = html.replace(/(src=")\.\.\/images\//g,
                                     '$1' + base + 'books/' + vol + '/images/');
               }
+              // PDF 链接在 GitHub 上写 ../../output/（从 books/<册>/ 回到仓库根），站点根是 /<repo>/，要换成绝对地址
+              html = html.replace(/href="\.\.\/\.\.\/output\//g, 'href="' + base + 'output/');
               // 册首页里写的是相对本章的链接（GitHub 端可直接点），站点里重写成 hash 路由
               if (vol && /^\/?books\/[^\/]+\/README(\.md)?$/.test(path)) {
                 html = html.replace(/href="#\/chapters\//g,
