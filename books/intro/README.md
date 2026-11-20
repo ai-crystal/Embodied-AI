@@ -6,7 +6,7 @@
 
 作者：**Dr. Dezeming**　·　2026 年 · 第一版
 
-[开始阅读](books/intro/chapters/ch01.md)　·　<a href="../../output/embodied-intro.pdf" target="_blank" rel="noopener">下载 PDF</a>
+[开始阅读](chapters/ch01.md)　·　<a href="../../output/embodied-intro.pdf" target="_blank" rel="noopener">下载 PDF</a>
 
 ![封面](images/cover.jpg)
 
