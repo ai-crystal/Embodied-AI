@@ -42,4 +42,3 @@
   - [后记](books/system/front/afterword.md)
 
 - [下载本册 PDF](output/embodied-system.pdf)
-- [切换到入门篇](books/intro/README.md)

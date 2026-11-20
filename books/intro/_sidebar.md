@@ -27,4 +27,3 @@
   - [后记](books/intro/front/afterword.md)
 
 - [下载本册 PDF](output/embodied-intro.pdf)
-- [切换到系统篇](books/system/README.md)

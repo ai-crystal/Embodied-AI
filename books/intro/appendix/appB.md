@@ -43,4 +43,4 @@
 - **LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning**（Bo Liu, Yifeng Zhu, Chongkai Gao, et al.，2023）。终身学习视角的基准，四套任务分别考迁移与遗忘。 arXiv:2306.03310
 - **Evaluating Real-World Robot Manipulation Policies in Simulation**（Xuanlin Li, Kyle Hsu, Jiayuan Gu, et al.，2024）。把真机策略搬进仿真评测的尝试，讨论“仿真分数能不能代表真机”最认真的一篇。 arXiv:2405.05941
 - **BLINK: Multimodal Large Language Models Can See but Not Perceive**（Xingyu Fu, Yushi Hu, Bangzheng Li, et al.，2024）。揭示多模态模型“看得见但看不懂”的评测。空间类题目上的差距一目了然。 arXiv:2404.12390
-- **A Survey of Embodied AI: From Simulators to Research Tasks**（Jiafei Duan, Samson Yu, Hui Li Tan, et al.，2021）。综述，适合当索引。读完这本册子再翻它，能把论文摆到正确的位置上。 arXiv:2103.04918
+- **A Survey of Embodied AI: From Simulators to Research Tasks**（Jiafei Duan, Samson Yu, Hui Li Tan, et al.，2021）。综述，适合当索引。读完前面的正文再翻它，能把论文摆到正确的位置上。 arXiv:2103.04918
