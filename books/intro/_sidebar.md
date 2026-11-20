@@ -10,16 +10,26 @@
   - [第 4 章　相机与三维空间](books/intro/chapters/ch04.md)
   - [第 5 章　物体在哪里](books/intro/chapters/ch05.md)
   - [第 6 章　地图与记忆](books/intro/chapters/ch06.md)
+  - [第 7 章　重建与三维表征](books/intro/chapters/ch07.md)
 
 - **第三篇　让机器学会动作**
-  - [第 7 章　跟着人学动作](books/intro/chapters/ch07.md)
-  - [第 8 章　强化学习的最小必要知识](books/intro/chapters/ch08.md)
-  - [第 9 章　在仿真里练习](books/intro/chapters/ch09.md)
+  - [第 8 章　跟着人学动作](books/intro/chapters/ch08.md)
+  - [第 9 章　强化学习的最小必要知识](books/intro/chapters/ch09.md)
+  - [第 10 章　在仿真里练习](books/intro/chapters/ch10.md)
+  - [第 11 章　规划一条可行的路](books/intro/chapters/ch11.md)
 
-- **第四篇　大模型与落地**
-  - [第 10 章　语言模型当大脑](books/intro/chapters/ch10.md)
-  - [第 11 章　视觉-语言-动作模型](books/intro/chapters/ch11.md)
-  - [第 12 章　数据、评测与落地](books/intro/chapters/ch12.md)
+- **第四篇　大模型进入身体**
+  - [第 12 章　语言模型当大脑](books/intro/chapters/ch12.md)
+  - [第 13 章　视觉-语言-动作模型](books/intro/chapters/ch13.md)
+  - [第 14 章　世界模型与空间智能](books/intro/chapters/ch14.md)
+  - [第 15 章　数据、评测与落地](books/intro/chapters/ch15.md)
+
+- **第五篇　身体与控制**
+  - [第 16 章　腿足与人形机器人](books/intro/chapters/ch16.md)
+  - [第 17 章　灵巧手与触觉](books/intro/chapters/ch17.md)
+
+- **第六篇　全景与路线**
+  - [第 18 章　产业地图与未解的问题](books/intro/chapters/ch18.md)
 
 - **附录与后记**
   - [附录 A　术语表](books/intro/appendix/appA.md)

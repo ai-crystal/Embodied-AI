@@ -1,223 +1,239 @@
 # -*- coding: utf-8 -*-
-"""第 7 章插图：协变量偏移、动作块的两种执行方式、遥操作采集链路。"""
+"""第 7 章插图：三代重建方法对比、一个高斯里装了什么、语义场查询。"""
 import os
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), "common"))
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.patches import Ellipse, Rectangle
+from matplotlib.patches import Ellipse, Rectangle, Circle
+from matplotlib.colors import LinearSegmentedColormap
 import figstyle as fs
 
 
-def _bezier(p0, p1, p2, p3, n=260):
-    t = np.linspace(0, 1, n)[:, None]
-    p = ((1 - t) ** 3) * np.array(p0) + 3 * ((1 - t) ** 2) * t * np.array(p1) \
-        + 3 * (1 - t) * (t ** 2) * np.array(p2) + (t ** 3) * np.array(p3)
-    return p[:, 0], p[:, 1]
+def fig_three_gens():
+    """三代方法的五栏对照矩阵。"""
+    fig, ax = fs.canvas(6.7, 4.35)
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 6.62)
 
+    LX = 0.05
+    C0 = 1.68
+    CW, CG = 2.68, 0.09
+    COLORS = [fs.TEAL, fs.BLUE, fs.ACCENT]
+    HEADS = ["SfM　稀疏重建\n约 2006", "NeRF　神经辐射场\n2020", "3DGS　高斯泼溅\n2023"]
 
-def fig_covariate_shift():
-    """(a) 俯视图上专家轨迹与策略轨迹分开；(b) 偏差随执行时间的量级。"""
-    fig, axes = plt.subplots(1, 2, figsize=(6.6, 3.15),
-                             gridspec_kw=dict(width_ratios=[1.08, 1.0], wspace=0.28))
+    HY, HH = 5.80, 0.68
+    for i, (h, c) in enumerate(zip(HEADS, COLORS)):
+        x = C0 + i * (CW + CG)
+        fs.box(ax, x, HY, CW, HH, h, fc="#FFFFFF", ec=c, tc=c, fs=8.8, lw=1.3, weight="bold")
 
-    # ---------------- (a) 俯视图 ----------------
-    ax = axes[0]
-    ax.set_xlim(0, 8.0)
-    ax.set_ylim(0, 5.95)
-    ax.axis("off")
-    ax.text(0.05, 5.72, "(a)", fontsize=9.0, color=fs.INK, weight="bold", va="top")
+    ROWS = [
+        ("输入", ["几十到几百张照片\n顺序随意",
+                  "照片 + 相机位姿\n位姿由 SfM 给",
+                  "照片 + 位姿\n+ 稀疏点云"]),
+        ("表示的\n是什么", ["几万个稀疏的\n三维特征点",
+                            "一个 8 层网络\n记下整个场景",
+                            "100 到 500 万个\n各向异性椭球"]),
+        ("建一次\n要多久", ["十几分钟\n到几小时",
+                            "10 万到 30 万次迭代\n单卡一到两天",
+                            "6 到 51 分钟\n单卡训完"]),
+        ("出一帧\n要多久", ["不能换视角\n只能看点云",
+                            "800×800\n约 30 秒",
+                            "1080p 每秒\n134 到 197 帧"]),
+        ("机器人\n拿它做什么", ["给后两代\n做初始化",
+                               "合成训练图\n反算深度",
+                               "数字孪生\n实时预览"]),
+    ]
 
-    ax.add_patch(Rectangle((0.30, 0.45), 7.35, 5.10, facecolor=fs.PAPER,
-                           edgecolor="#D9CDBB", lw=1.0, zorder=0))
+    RH, RG = 0.97, 0.06
+    for r, (lab, cells) in enumerate(ROWS):
+        y = HY - 0.16 - RH - r * (RH + RG)
+        fs.label(ax, LX + 0.06, y + RH / 2, lab, fs=8.5, color=fs.INK, ha="left")
+        for i, t in enumerate(cells):
+            x = C0 + i * (CW + CG)
+            fs.box(ax, x, y, CW, RH, t, fc="#FFFFFF", ec="#D8DEE6", lw=0.9, fs=8.3)
 
-    ax.add_patch(Ellipse((1.45, 2.35), 0.58, 0.46, facecolor="#FFFFFF",
-                         edgecolor=fs.MUTED, lw=1.0, zorder=4))
-    fs.label(ax, 1.45, 1.94, "杯子", fs=8.0, color=fs.MUTED, va="top")
-
-    ax.add_patch(Ellipse((6.55, 4.30), 1.16, 0.92, facecolor="#FFFFFF",
-                         edgecolor=fs.MUTED, lw=1.0, zorder=4))
-    ax.add_patch(Ellipse((6.55, 4.30), 0.70, 0.54, facecolor="none",
-                         edgecolor=fs.FAINT, lw=0.8, zorder=4))
-    fs.label(ax, 6.55, 4.30, "盘子", fs=8.0, color=fs.MUTED)
-
-    ax.add_patch(Rectangle((6.44, 1.10), 1.14, 0.60, facecolor="#FFFFFF",
-                           edgecolor=fs.MUTED, lw=1.0, zorder=4))
-    fs.label(ax, 7.01, 1.40, "纸巾盒", fs=8.0, color=fs.MUTED)
-
-    # 专家轨迹与训练数据覆盖的容差带
-    ex, ey = _bezier((1.45, 2.35), (2.35, 3.95), (4.55, 4.95), (6.45, 4.32))
-    d = np.gradient(np.stack([ex, ey], axis=1), axis=0)
-    nrm = np.stack([-d[:, 1], d[:, 0]], axis=1)
-    nrm /= (np.linalg.norm(nrm, axis=1, keepdims=True) + 1e-9)
-    band = 0.17
-    ax.fill(np.concatenate([ex + nrm[:, 0] * band, (ex - nrm[:, 0] * band)[::-1]]),
-            np.concatenate([ey + nrm[:, 1] * band, (ey - nrm[:, 1] * band)[::-1]]),
-            facecolor=fs.GREEN, alpha=0.13, edgecolor="none", zorder=1)
-    ax.plot(ex, ey, color=fs.GREEN, lw=2.0, zorder=3, solid_capstyle="round")
-    fs.label(ax, 0.52, 5.22, "专家走过的路", fs=8.4, color=fs.GREEN, ha="left")
-    fs.label(ax, 0.52, 4.90, "绿带是训练数据覆盖到的状态", fs=8.0, color=fs.GREEN, ha="left")
-
-    # 策略自己走出来的轨迹
-    px, py = _bezier((1.45, 2.35), (2.55, 2.05), (3.95, 1.62), (7.18, 1.44))
-    ax.plot(px, py, color=fs.ACCENT, lw=2.0, ls=(0, (5, 2)), zorder=3)
-    fs.label(ax, 2.85, 1.10, "策略自己走出来的路", fs=8.2, color=fs.ACCENT)
-
-    for frac, tag, dx, dy, ha in ((0.17, "1 s", 0.16, 0.14, "left"),
-                                  (0.45, "3 s", 0.10, 0.20, "left"),
-                                  (0.78, "6 s", -0.20, 0.18, "left")):
-        i = int(frac * (len(px) - 1))
-        ax.plot([px[i]], [py[i]], "o", ms=3.4, color=fs.ACCENT, zorder=6)
-        fs.label(ax, px[i] + dx, py[i] + dy, tag, fs=8.0, color=fs.MUTED,
-                 ha=ha, va="bottom" if dy > 0 else "top")
-
-    ax.annotate("这一段的画面\n训练时从没出现过", xy=(4.88, 1.72), xytext=(4.30, 2.95),
-                fontsize=7.8, color=fs.INK, ha="left", va="center",
-                arrowprops=dict(arrowstyle="-|>", color=fs.FAINT, lw=0.8,
-                                shrinkA=2, shrinkB=2))
-
-    # ---------------- (b) 偏差曲线 ----------------
-    ax = axes[1]
-    ax.set_xlim(-0.35, 7.6)
-    ax.set_ylim(0, 14.8)
-    fs.clean(ax, grid=True, spines=("left", "bottom"))
-    ax.set_xticks([0, 2, 4, 6])
-    ax.set_yticks([0, 4, 8, 12])
-    ax.set_xlabel("执行时间（秒）", fontsize=9.0)
-    ax.set_ylabel("与专家轨迹的偏差（厘米）", fontsize=9.0)
-
-    anchors_t = np.array([0.0, 0.6, 1.2, 2.2, 3.2, 4.6, 6.4, 7.2])
-    anchors_e = np.array([0.25, 0.55, 1.0, 2.7, 5.0, 8.6, 12.0, 13.6])
-    tt = np.linspace(0, 7.2, 260)
-    ee = 10 ** np.interp(tt, anchors_t, np.log10(anchors_e))
-    ax.axhspan(0, 3, color=fs.GREEN, alpha=0.10, zorder=0)
-    ax.axhspan(3, 14.8, color=fs.ACCENT, alpha=0.05, zorder=0)
-    ax.plot(tt, ee, color=fs.ACCENT, lw=2.0, zorder=3)
-
-    for t0, e0, txt, dx, dy in ((1.2, 1.0, "1 cm", -0.15, 1.6),
-                                (3.2, 5.0, "5 cm", -0.15, 1.7),
-                                (6.4, 12.0, "12 cm", -0.20, 1.5)):
-        ax.plot([t0], [e0], "o", ms=4.2, color=fs.ACCENT, zorder=4)
-        ax.plot([0, t0], [e0, e0], color=fs.FAINT, lw=0.7, ls=(0, (3, 2)), zorder=2)
-        ax.plot([t0, t0], [0, e0], color=fs.FAINT, lw=0.7, ls=(0, (3, 2)), zorder=2)
-        ax.annotate(txt, xy=(t0, e0), xytext=(t0 + dx, e0 + dy), fontsize=8.2,
-                    color=fs.INK, ha="right", va="center")
-
-    fs.label(ax, 5.35, 1.55, "还在训练分布里\n能纠回来", fs=8.0, color=fs.GREEN)
-    fs.label(ax, 1.30, 9.90, "越来越像瞎猜", fs=8.0, color=fs.ACCENT)
-    ax.text(-0.28, 14.1, "(b)", fontsize=9.0, color=fs.INK, weight="bold")
-
+    ax.text(5.0, 0.24, "时长与帧率取自两篇论文的报数，均为单卡、室内尺度场景",
+            fontsize=8.0, color=fs.FAINT, ha="center", va="center")
     fs.save(fig, "ch07", "fig07-01")
 
 
-def fig_action_chunk():
-    """(a) 整块执行；(b) 时间集成。横轴统一为 16 个时间步。"""
-    fig, ax = fs.canvas(6.6, 3.9)
+def fig_gaussian():
+    """一个高斯的五个量，以及许多高斯贴住一层表面。"""
+    fig, ax = fs.canvas(6.7, 4.25)
     ax.set_xlim(0, 10)
-    ax.set_ylim(0, 7.2)
+    ax.set_ylim(0, 6.30)
 
-    x0, x1 = 0.95, 9.10
-    step = (x1 - x0) / 16.0
+    # ---------------- (a) 单个高斯 ----------------
+    cx, cy, A, B, TH = 2.35, 4.85, 1.30, 0.50, 15.0
+    t = np.radians(TH)
+    ct, st = np.cos(t), np.sin(t)
+    ax.add_patch(Ellipse((cx, cy), 2 * A, 2 * B, angle=TH, facecolor="#FBEEDD",
+                         edgecolor=fs.ACCENT, lw=1.3, zorder=2))
+    # 主轴
+    ax.plot([cx - A * ct, cx + A * ct], [cy - A * st, cy + A * st],
+            color=fs.MUTED, lw=0.9, zorder=4)
+    # 次轴
+    ax.plot([cx - B * st, cx + B * st], [cy + B * ct, cy - B * ct],
+            color=fs.MUTED, lw=0.8, ls=(0, (3, 2)), zorder=4)
+    # 参考水平线与旋转角
+    ax.plot([cx - 0.86, cx], [cy, cy], color=fs.FAINT, lw=0.8, ls=(0, (3, 2)), zorder=4)
+    arc = np.linspace(np.pi, np.pi + t, 40)
+    ax.plot(cx + 0.56 * np.cos(arc), cy + 0.56 * np.sin(arc),
+            color=fs.MUTED, lw=0.9, zorder=5)
 
-    def xt(i):
-        return x0 + i * step
+    def dot(x, y, num, r=0.150):
+        ax.add_patch(Circle((x, y), r, facecolor="white", edgecolor=fs.INK,
+                            lw=0.9, zorder=9))
+        ax.text(x, y - 0.006, num, fontsize=7.4, color=fs.INK, ha="center",
+                va="center", zorder=10)
 
-    for i in range(0, 17, 4):
-        ax.plot([xt(i), xt(i)], [0.82, 5.95], color=fs.GRID, lw=0.7, zorder=0)
-        ax.text(xt(i), 0.60, str(i), ha="center", va="top", fontsize=8.0, color=fs.MUTED)
+    dot(cx, cy, "1")
+    dot(cx + 0.68 * ct, cy + 0.68 * st, "2")
+    dot(cx - 1.33, cy - 0.67, "3")
+    dot(cx + 0.27, cy + 0.43, "4")
+    ax.plot([cx - 1.20, cx - 0.60], [cy - 0.57, cy - 0.20], color=fs.FAINT, lw=0.7, zorder=6)
+    # 球谐：三条短射线，末端三个颜色
+    for ang, col in ((-18, fs.GOLD), (-34, fs.PINK), (-50, fs.BLUE)):
+        a = np.radians(ang)
+        ax.plot([cx + 0.24 * np.cos(a), cx + 0.60 * np.cos(a)],
+                [cy + 0.24 * np.sin(a) * 0.62, cy + 0.60 * np.sin(a) * 0.62],
+                color=col, lw=1.1, zorder=6)
+        ax.add_patch(Circle((cx + 0.60 * np.cos(a), cy + 0.60 * np.sin(a) * 0.62), 0.052,
+                            facecolor=col, edgecolor="none", zorder=7))
+    dot(cx + 0.95, cy - 0.30, "5")
 
-    ax.plot([x0, x1], [0.82, 0.82], color=fs.MUTED, lw=0.9, zorder=1)
-    fs.label(ax, 9.38, 0.60, "时间步", fs=8.0, color=fs.MUTED, ha="left", va="top")
+    fs.label(ax, 0.28, 6.02, "(a) 一个高斯有五个量", fs=9, color=fs.INK, ha="left",
+             weight="bold")
 
-    # ---------------- (a) 整块执行 ----------------
-    ax.text(0.55, 6.92, "(a) 整块执行", fontsize=9.4, color=fs.INK, weight="bold")
-    y_a, h = 5.30, 0.56
-    for s, lab in ((0, "第 1 块，8 步"), (8, "第 2 块，8 步")):
-        fs.box(ax, xt(s) + 0.02, y_a, step * 8 - 0.04, h, lab, fs=8.4,
-               ec=fs.BLUE, fc="#EEF3FB", lw=1.0)
-    for s in (0, 8):
-        ax.plot([xt(s)], [y_a + h + 0.06], marker="v", ms=4.2, color=fs.BLUE, zorder=5)
-        fs.label(ax, xt(s) + 0.10, y_a + h + 0.22, "看一眼", fs=8.0, color=fs.BLUE, ha="left")
-    fs.label(ax, xt(4.6), 4.92, "这 8 步里不回头，中途发生什么都要等它走完",
-             fs=8.2, color=fs.MUTED)
+    items = [
+        ("1", "位置　x, y, z", "3 个数，椭球的中心", fs.INK),
+        ("2", "尺度　三个半轴长", "3 个数，决定扁还是长", fs.INK),
+        ("3", "旋转　四元数", "4 个数，决定朝哪边歪", fs.INK),
+        ("4", "不透明度　α", "1 个数，有多挡光", fs.INK),
+        ("5", "球谐　16 × 3", "48 个数，颜色随方向怎么变", fs.ACCENT),
+    ]
+    for i, (num, name, note, col) in enumerate(items):
+        y = 3.62 - i * 0.58
+        ax.add_patch(Circle((0.30, y), 0.145, facecolor="#FFFFFF", edgecolor=col, lw=0.9, zorder=5))
+        ax.text(0.30, y - 0.004, num, fontsize=7.4, color=col, ha="center", va="center", zorder=6)
+        ax.text(0.56, y + 0.085, name, fontsize=8.5, color=col, ha="left", va="center")
+        ax.text(0.56, y - 0.175, note, fontsize=8.0, color=fs.MUTED, ha="left", va="center")
+    ax.text(0.28, 0.46, "加起来 59 个浮点数，一个高斯 236 字节",
+            fontsize=8.2, color=fs.INK, ha="left", va="center")
 
-    # ---------------- (b) 时间集成 ----------------
-    ax.text(0.55, 4.42, "(b) 时间集成", fontsize=9.4, color=fs.INK, weight="bold")
-    y_b, n, hb = 1.48, 5, 0.34
-    for i in range(n):
-        s = xt(i)
-        fs.box(ax, s + 0.02, y_b + i * hb, step * 8 - 0.04, hb - 0.05, "", fs=8.0,
-               ec=fs.PURPLE, fc=fs.PURPLE, lw=0.9, alpha=0.20 + 0.14 * i, z=3 + i)
-    top = y_b + (n - 1) * hb
-    fs.label(ax, xt(4) + 2.00, top + hb / 2 - 0.03, "8 步", fs=8.0, color="#FFFFFF")
+    # ---------------- (b) 一层表面 ----------------
+    fs.label(ax, 5.32, 6.02, "(b) 许多高斯贴住一层表面", fs=9, color=fs.INK,
+             ha="left", weight="bold")
 
-    t_now = xt(4)
-    ax.plot([t_now, t_now], [y_b - 0.06, top + hb - 0.02], color=fs.ACCENT,
-            lw=1.2, ls=(0, (4, 2)), zorder=9)
-    fs.label(ax, xt(4.7), 3.42, "此刻有 5 个预测重叠，按 exp(-m·i) 加权平均，越新权重越大",
-             fs=8.2, color=fs.INK)
-    fs.label(ax, xt(4.4), 1.10, "每走一步都推理一次，动作跟得上观测，代价是推理次数多 8 倍",
-             fs=8.2, color=fs.MUTED)
+    # 圆球：截面是圆，只碰到一个点
+    ax.add_patch(Rectangle((5.30, 2.72), 1.46, 0.26, facecolor="#EDEAE3",
+                           edgecolor=fs.FAINT, lw=0.8, zorder=3))
+    for i in range(3):
+        ax.add_patch(Circle((5.58 + i * 0.44, 3.18), 0.20, facecolor="none",
+                            edgecolor=fs.FAINT, lw=0.7, ls=(0, (2, 2)), zorder=3))
+        ax.add_patch(Circle((5.58 + i * 0.44, 2.98), 0.036, facecolor=fs.FAINT,
+                            edgecolor="none", zorder=5))
+    fs.label(ax, 6.03, 2.40, "球只碰到一个点", fs=7.9, color=fs.MUTED, ha="center")
+
+    # 扁椭球 + 竖直椭球：贴住一整段
+    ax.add_patch(Rectangle((7.10, 2.72), 2.34, 0.26, facecolor="#EDEAE3",
+                           edgecolor=fs.FAINT, lw=0.8, zorder=3))
+    for i in range(4):
+        ax.add_patch(Ellipse((7.38 + i * 0.52, 3.10), 0.72, 0.24, angle=-3 + i * 2,
+                             facecolor="#FBEEDD", edgecolor=fs.ACCENT, lw=1.0, zorder=4))
+
+    ax.add_patch(Rectangle((9.20, 2.98), 0.24, 1.62, facecolor="#EDEAE3",
+                           edgecolor=fs.FAINT, lw=0.8, zorder=3))
+    for i in range(3):
+        ax.add_patch(Ellipse((9.10, 3.34 + i * 0.45), 0.22, 0.56, angle=5 - i * 3,
+                             facecolor="#FBEEDD", edgecolor=fs.ACCENT, lw=1.0, zorder=4))
+    ax.add_patch(Ellipse((9.03, 3.06), 0.64, 0.22, angle=-42,
+                         facecolor="#F7E0C6", edgecolor=fs.GOLD, lw=1.1, zorder=5))
+    fs.label(ax, 8.27, 2.40, "扁的贴住一整段", fs=7.9, color=fs.ACCENT, ha="center")
 
     fs.save(fig, "ch07", "fig07-02")
 
 
-def fig_teleop_chain():
-    """遥操作采集链路：人 → 主手 → 从手 → 桌面，传感器与时间戳汇入数据集。"""
-    fig, ax = fs.canvas(6.6, 3.8)
+def fig_semantic():
+    """一句话变成向量，再在场景里找出对应区域。"""
+    fig, ax = fs.canvas(6.7, 4.15)
     ax.set_xlim(0, 10)
-    ax.set_ylim(0, 6.3)
+    ax.set_ylim(0, 6.20)
 
-    W, H, Y = 1.88, 1.12, 3.30
-    xs = [0.22, 2.46, 4.70, 6.94]
-    heads = [("人", "看着画面动手", fs.PAPER),
-             ("主手", "被推动，读角度", "#FFFFFF"),
-             ("从手", "同步复现动作", "#FFFFFF"),
-             ("桌面", "杯子与盘子", "#FFFFFF")]
-    for x, (t, s, fc) in zip(xs, heads):
-        fs.box(ax, x, Y, W, H, "", fc=fc, ec=fs.INK, lw=1.1)
-        fs.label(ax, x + W / 2, Y + H - 0.30, t, fs=9.6, color=fs.INK, weight="bold")
-        fs.label(ax, x + W / 2, Y + 0.36, s, fs=8.0, color=fs.MUTED)
+    # ---- 顶部流程 ----
+    fs.box(ax, 0.20, 4.86, 2.55, 0.88, "一句话\n「能装水的容器」", fs=8.6, ec=fs.INK)
+    fs.arrow(ax, (2.80, 5.30), (3.15, 5.30))
+    fs.box(ax, 3.20, 4.86, 2.60, 0.88, "CLIP 文本编码器\n512 维", fs=8.6, ec=fs.INK)
+    fs.arrow(ax, (5.85, 5.30), (6.20, 5.30))
+    fs.box(ax, 6.25, 4.86, 2.30, 0.88, "句子向量 q\n512 个浮点", fs=8.6, ec=fs.BLUE, tc=fs.BLUE)
 
-    for i in range(3):
-        fs.arrow(ax, (xs[i] + W + 0.03, Y + H / 2), (xs[i + 1] - 0.03, Y + H / 2),
-                 color=fs.MUTED if i < 2 else fs.ACCENT, lw=1.2)
+    fs.arrow(ax, (7.40, 4.80), (7.40, 4.32), color=fs.BLUE)
+    fs.label(ax, 7.40, 4.12, "逐点做点积", fs=8.0, color=fs.BLUE, ha="center")
 
-    # 反馈弧：画面与力感回到人
-    ax.annotate("", xy=(xs[0] + W / 2, Y + H + 0.05), xytext=(xs[3] + W / 2, Y + H + 0.05),
-                arrowprops=dict(arrowstyle="-|>", color=fs.BLUE, lw=1.1,
-                                connectionstyle="arc3,rad=0.22",
-                                shrinkA=2, shrinkB=2))
-    fs.label(ax, (xs[0] + xs[3] + W) / 2, 5.62, "画面与力感", fs=8.4, color=fs.BLUE)
+    # ---- 场景俯视 ----
+    X0, X1, Y0, Y1 = 0.95, 9.05, 0.62, 3.86
+    gx = np.linspace(X0, X1, 340)
+    gy = np.linspace(Y0, Y1, 160)
+    GX, GY = np.meshgrid(gx, gy)
 
-    # 第二层：两路传感器
-    fs.box(ax, 4.52, 1.86, 2.24, 0.94, "", fc="#FFFFFF", ec=fs.GREEN, lw=1.0)
-    fs.label(ax, 5.64, 2.52, "编码器 50 Hz", fs=8.6, color=fs.GREEN)
-    fs.label(ax, 5.64, 2.16, "关节角 + 夹爪宽度", fs=8.0, color=fs.MUTED)
+    def blob(mx, my, sx, sy, amp):
+        return amp * np.exp(-(((GX - mx) / sx) ** 2 + ((GY - my) / sy) ** 2))
 
-    fs.box(ax, 6.88, 1.86, 2.24, 0.94, "", fc="#FFFFFF", ec=fs.BLUE, lw=1.0)
-    fs.label(ax, 8.00, 2.52, "腕部相机 30 fps", fs=8.6, color=fs.BLUE)
-    fs.label(ax, 8.00, 2.16, "640 × 480 彩色图", fs=8.0, color=fs.MUTED)
+    F = (blob(6.05, 2.30, 0.85, 0.70, 1.00)      # 马克杯
+         + blob(7.72, 2.82, 0.62, 0.52, 0.58)     # 保温杯
+         + blob(4.28, 2.46, 0.70, 0.58, 0.40)     # 盘子
+         + blob(2.30, 1.52, 0.80, 0.58, 0.10))    # 纸巾盒
+    F = F / F.max()
 
-    fs.arrow(ax, (5.64, Y - 0.03), (5.64, 2.82), color=fs.GREEN, lw=1.0)
-    fs.arrow(ax, (8.00, Y - 0.03), (8.00, 2.82), color=fs.BLUE, lw=1.0)
-    fs.label(ax, 5.50, 3.06, "读数", fs=8.0, color=fs.GREEN, ha="right")
-    fs.label(ax, 8.14, 3.06, "图像", fs=8.0, color=fs.BLUE, ha="left")
+    cmap = LinearSegmentedColormap.from_list(
+        "sem", ["#FFFFFF", "#FCEBD6", "#F7C79E", "#E98B58", "#BE3C0B"],
+        N=256)
+    ax.imshow(F, origin="lower", extent=[X0, X1, Y0, Y1], cmap=cmap, vmin=0.0,
+              vmax=1.0, aspect="auto", zorder=1, interpolation="bilinear")
+    ax.add_patch(Rectangle((X0, Y0), X1 - X0, Y1 - Y0, facecolor="none",
+                           edgecolor=fs.FAINT, lw=0.9, zorder=6))
 
-    # 第三层：数据集
-    fs.box(ax, 1.05, 0.18, 8.05, 1.22, "", fc="#FDF1E6", ec=fs.ACCENT, lw=1.2)
-    fs.label(ax, 5.08, 1.08, "一条示教", fs=9.4, color=fs.ACCENT, weight="bold")
-    fs.label(ax, 5.08, 0.74, "600 张图 + 1000 个关节点 + 夹爪开合 + 时间戳", fs=8.2, color=fs.INK)
-    fs.label(ax, 5.08, 0.40, "两路频率不同，靠时间戳对齐，最坏差半帧 17 ms", fs=8.0, color=fs.MUTED)
+    def obj_label(x, y, text, col):
+        ax.text(x, y, text, fontsize=7.9, color=col, ha="center", va="center", zorder=10,
+                bbox=dict(facecolor="white", edgecolor="none", alpha=0.85, pad=1.4))
 
-    fs.arrow(ax, (5.64, 1.82), (5.64, 1.42), color=fs.MUTED, lw=1.0)
-    fs.arrow(ax, (8.00, 1.82), (8.00, 1.42), color=fs.MUTED, lw=1.0)
+    # 马克杯
+    ax.add_patch(Circle((6.05, 2.30), 0.33, facecolor="#FFFFFF", edgecolor=fs.INK, lw=1.2, zorder=7))
+    ax.add_patch(Circle((6.05, 2.30), 0.26, facecolor="none", edgecolor=fs.MUTED, lw=0.8, zorder=7))
+    ax.add_patch(Circle((6.39, 2.30), 0.11, facecolor="none", edgecolor=fs.INK, lw=1.0, zorder=7))
+    ax.add_patch(Circle((6.05, 2.30), 0.49, facecolor="none", edgecolor=fs.ACCENT,
+                        lw=1.3, ls=(0, (4, 2)), zorder=8))
+    obj_label(6.05, 3.06, "马克杯　命中", fs.ACCENT)
+
+    # 保温杯
+    ax.add_patch(Ellipse((7.72, 2.82), 0.46, 0.46, facecolor="#F3F4F6",
+                         edgecolor=fs.INK, lw=1.1, zorder=7))
+    ax.add_patch(Ellipse((7.72, 2.82), 0.16, 0.16, facecolor="none",
+                         edgecolor=fs.MUTED, lw=0.8, zorder=7))
+    obj_label(7.72, 3.40, "保温杯　次之", fs.MUTED)
+
+    # 盘子
+    ax.add_patch(Ellipse((4.28, 2.46), 1.00, 0.76, facecolor="#FBF7F0",
+                         edgecolor=fs.INK, lw=1.1, zorder=7))
+    ax.add_patch(Ellipse((4.28, 2.46), 0.60, 0.44, facecolor="none",
+                         edgecolor=fs.FAINT, lw=0.8, zorder=7))
+    obj_label(4.28, 3.16, "盘子　弱", fs.MUTED)
+
+    # 纸巾盒
+    ax.add_patch(Rectangle((1.92, 1.30), 0.82, 0.44, facecolor="#F6F3EC",
+                           edgecolor=fs.INK, lw=1.0, zorder=7))
+    obj_label(2.33, 2.14, "纸巾盒　几乎为零", fs.MUTED)
+
+    fs.label(ax, 1.05, 0.98, "桌面上每个位置都挂着一个向量，亮的地方就是和这句话最像的一块",
+             fs=8.2, color=fs.MUTED, ha="left")
+    fs.label(ax, 8.95, 3.66, "俯视", fs=7.8, color=fs.FAINT, ha="right")
 
     fs.save(fig, "ch07", "fig07-03")
 
 
 if __name__ == "__main__":
-    fig_covariate_shift()
-    fig_action_chunk()
-    fig_teleop_chain()
+    fig_three_gens()
+    fig_gaussian()
+    fig_semantic()

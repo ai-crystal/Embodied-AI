@@ -1,175 +1,195 @@
 # -*- coding: utf-8 -*-
-"""第 9 章插图：训练环路、并行环境数与时长、sim2real 差距五来源。"""
+"""第 9 章插图：交互循环与回合、三类算法关系、稀疏与稠密奖励的学习曲线。
+
+第三张图不是示意图。脚本里带一个 36x36 网格上的表格 Q-learning 实验，
+稀疏奖励与稠密奖励各跑 8 个随机种子，曲线是实测值，跑完约 10 秒。
+"""
 import os
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), "common"))
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 import figstyle as fs
 
 
 def fig_loop():
-    """训练 -> 评估 -> 部署 -> 回流 的四站环路。"""
-    fig, ax = fs.canvas(6.6, 4.0)
+    """(a) 智能体与环境的循环 (b) 一条回合的时间轴。"""
+    fig, ax = fs.canvas(6.6, 4.9)
     ax.set_xlim(0, 10)
-    ax.set_ylim(0, 6.6)
+    ax.set_ylim(0.95, 8.25)
 
-    W, H = 3.30, 1.30
-    boxes = [
-        (0.55, 4.85, "训练\n显卡上跑几千个环境", fs.BLUE, "#EFF4FC"),
-        (6.15, 4.85, "评估\n固定种子 + 随机种子", fs.TEAL, "#ECF6F4"),
-        (6.15, 0.95, "部署\n真机零样本先跑降级版", fs.ACCENT, "#FDF1E6"),
-        (0.55, 0.95, "回流\n看录像 · 标失败 · 改参数", fs.PURPLE, "#F3F0FB"),
+    # ---------- (a) ----------
+    fs.label(ax, 0.10, 8.02, "(a)", fs=10, color=fs.MUTED, ha="left", va="top")
+
+    W, H = 3.55, 1.20
+    fs.box(ax, 0.42, 6.18, W, H, "智能体（策略）\n看画面和关节角\n输出三维速度增量", fs=9.0)
+    fs.box(ax, 6.05, 6.18, W, H, "环境（桌面与方块）\n执行动作，物理演化\n给出新画面和新分数", fs=9.0)
+
+    fs.arrow(ax, (4.00, 7.08), (6.02, 7.08))
+    fs.label(ax, 5.00, 7.16, "动作 $a_t$", fs=9.0, color=fs.INK, va="bottom")
+
+    fs.arrow(ax, (6.02, 6.48), (4.00, 6.48), color=fs.ACCENT)
+    fs.label(ax, 5.00, 6.40, "状态与奖励", fs=9.0, color=fs.ACCENT, va="top")
+
+    fs.label(ax, 5.00, 5.62, "转一圈交换一次，一步 100 毫秒", fs=9.0, color=fs.MUTED)
+
+    # ---------- (b) ----------
+    fs.label(ax, 0.10, 5.15, "(b)", fs=10, color=fs.MUTED, ha="left", va="top")
+
+    x0, x1, y = 0.55, 9.45, 2.60
+    ax.plot([x0, x1 + 0.12], [y, y], color=fs.INK, lw=1.4, zorder=2)
+    ax.plot([x1 + 0.12, x1 + 0.05], [y, y + 0.09], color=fs.INK, lw=1.4, zorder=2)
+    ax.plot([x1 + 0.12, x1 + 0.05], [y, y - 0.09], color=fs.INK, lw=1.4, zorder=2)
+
+    def X(t):
+        return x0 + (x1 - x0) * t / 120.0
+
+    marks = [
+        (0, "回合开始\n机械臂回到初始位姿", 2.88, "left"),
+        (45, "手接近方块\n夹爪合上", 3.40, "center"),
+        (95, "方块进入目标区\n奖励 +1", 2.88, "center"),
+        (120, "回合结束\n环境清零", 3.40, "right"),
     ]
-    for x, y, text, ec, fc in boxes:
-        fs.box(ax, x, y, W, H, text, fs=8.8, ec=ec, fc=fc, lw=1.2)
+    for t, text, ly, ha in marks:
+        x = X(t)
+        ax.scatter([x], [y], s=26, color=fs.ACCENT, zorder=5, edgecolor="white", linewidth=0.9)
+        ax.plot([x, x], [y + 0.03, ly - 0.05], color=fs.FAINT, lw=0.8, zorder=1)
+        fs.label(ax, x, ly, text, fs=8.6, ha=ha, va="bottom")
 
-    # 上：训练 -> 评估
-    fs.arrow(ax, (3.93, 5.50), (6.07, 5.50), color=fs.MUTED)
-    ax.text(5.00, 5.70, "策略快照", ha="center", va="bottom", fontsize=8.2, color=fs.MUTED)
+    for t in (0, 30, 60, 90, 120):
+        ax.plot([X(t), X(t)], [y - 0.05, y + 0.05], color=fs.MUTED, lw=0.9, zorder=3)
+        fs.label(ax, X(t), y - 0.12, f"{t}", fs=8.2, color=fs.MUTED, va="top")
 
-    # 右：评估 -> 部署
-    fs.arrow(ax, (7.80, 4.77), (7.80, 2.33), color=fs.MUTED)
-    ax.text(7.95, 3.55, "通过才上机", ha="left", va="center", fontsize=8.2, color=fs.MUTED)
+    fs.label(ax, 5.00, 1.72, "一步 = 100 毫秒，120 步 = 12 秒，这就是一个回合",
+             fs=9.0, color=fs.MUTED)
+    fs.label(ax, 5.00, 1.28, "中途超时不算失败，只把回报截断，否则策略会学会抢先结束",
+             fs=8.4, color=fs.FAINT)
 
-    # 下：部署 -> 回流
-    fs.arrow(ax, (6.07, 1.60), (3.93, 1.60), color=fs.ACCENT)
-    ax.text(5.00, 1.40, "每次失败一段录像", ha="center", va="top", fontsize=8.2, color=fs.ACCENT)
-
-    # 左：回流 -> 训练
-    fs.arrow(ax, (2.20, 2.33), (2.20, 4.77), color=fs.PURPLE)
-    ax.text(2.05, 3.55, "参数进随机化", ha="right", va="center", fontsize=8.2, color=fs.PURPLE)
-
-    ax.text(5.00, 3.62, "一圈的时间由最贵的一站决定", ha="center", va="center",
-            fontsize=10.5, color=fs.INK)
-    ax.text(5.00, 3.14, "训练按 GPU 小时算，部署按人天算", ha="center", va="center",
-            fontsize=8.4, color=fs.MUTED)
-    ax.text(5.00, 2.72, "回流最便宜也最容易被跳过", ha="center", va="center",
-            fontsize=8.4, color=fs.MUTED)
     fs.save(fig, "ch09", "fig09-01")
 
 
-def fig_speed():
-    """并行环境数与训练时长（数据取自 Isaac Gym 论文第 5 节）。"""
-    fig, axes = plt.subplots(1, 2, figsize=(6.9, 3.35),
-                             gridspec_kw={"width_ratios": [1.28, 1.0], "wspace": 0.42})
-    ax, ax2 = axes
+def fig_families():
+    """价值方法、策略梯度、actor-critic 三条路线的关系。"""
+    fig, ax = fs.canvas(6.6, 4.2)
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 6.85)
 
-    data = [
-        ("Shadow Hand", [(256, 5.0e4), (16384, 3.0e3)], fs.ACCENT,
-         ("14 小时", (2, 8, "left", "bottom")), ("1 小时", (2, 8, "left", "bottom"))),
-        ("Humanoid", [(256, 1.0e4), (4096, 1.0e3)], fs.BLUE,
-         ("2.7 小时", (2, 8, "left", "bottom")), ("17 分钟", (2, 9, "left", "bottom"))),
-        ("Ant", [(256, 1.0e3), (8192, 1.0e2)], fs.GREEN,
-         ("17 分钟", (2, -9, "left", "top")), ("100 秒", (2, 8, "left", "bottom"))),
-    ]
-    for name, pts, c, lab0, lab1 in data:
-        xs = [p[0] for p in pts]
-        ys = [p[1] for p in pts]
-        ax.plot(xs, ys, "-", color=c, lw=1.4, zorder=2, label=name)
-        ax.scatter(xs, ys, s=28, color=c, zorder=3, edgecolor="white", linewidth=0.8)
-        for (x, y), (txt, (dx, dy, ha, va)) in zip(pts, (lab0, lab1)):
-            ax.annotate(txt, (x, y), textcoords="offset points", xytext=(dx, dy),
-                        fontsize=8.0, color=c, ha=ha, va=va, zorder=4)
+    fs.box(ax, 0.35, 4.60, 4.25, 2.06,
+           "价值方法\n先给每个动作打分\n再挑分最高的那个\n代表 DQN（2013）",
+           fs=9.0, ec=fs.BLUE, fc="#EEF3FB")
+    fs.box(ax, 5.40, 4.60, 4.25, 2.06,
+           "策略梯度\n直接把动作概率往上推\n回报高就推得多\n代表 REINFORCE",
+           fs=9.0, ec=fs.PURPLE, fc="#F3EEFB")
+    fs.box(ax, 2.20, 1.84, 5.60, 2.08,
+           "actor-critic\nactor 出动作，critic 当对照组\n两边一起学，互为依赖\nPPO（2017）到 SAC（2018）都属于这一支",
+           fs=9.0, ec=fs.GREEN, fc="#EAF5F0")
 
-    ax.set_xscale("log")
-    ax.set_yscale("log")
-    ax.set_xlim(170, 3.4e4)
-    ax.set_ylim(50, 2.4e5)
-    ax.set_xticks([256, 1024, 4096, 16384])
-    ax.set_xticklabels(["256", "1k", "4k", "16k"])
-    ax.set_yticks([1e2, 1e3, 1e4, 1e5])
-    ax.set_yticklabels(["$10^2$", "$10^3$", "$10^4$", "$10^5$"])
-    ax.set_xlabel("并行环境数", fontsize=9)
-    ax.set_ylabel("训练到目标分数的时间（秒）", fontsize=9)
-    fs.clean(ax, grid=True)
-    ax.legend(loc="upper right", fontsize=8.0, handlelength=1.4, borderpad=0.25,
-              labelspacing=0.35)
-    ax.text(-0.02, 1.03, "(a)", transform=ax.transAxes, fontsize=9, color=fs.INK,
-            ha="left", va="bottom")
+    fs.arrow(ax, (1.75, 4.55), (3.20, 3.96), color=fs.BLUE, rad=-0.10)
+    fs.label(ax, 0.45, 4.42, "价值函数\n当 baseline", fs=8.6, color=fs.BLUE, ha="left", va="top")
 
-    # (b) 同一模仿任务：CPU 集群与单卡
-    names = ["PyBullet\n16 个 CPU 核", "Isaac Gym\n1 张 A100"]
-    hours = [30.0, 0.1]
-    colors = [fs.FAINT, fs.ACCENT]
-    ypos = [1.0, 0.0]
-    ax2.barh(ypos, hours, height=0.40, color=colors, edgecolor="white", zorder=2)
-    ax2.set_xscale("log")
-    ax2.set_xlim(0.04, 260)
-    ax2.set_yticks(ypos)
-    ax2.set_yticklabels(names, fontsize=8.2)
-    ax2.set_xlabel("训练耗时（小时，对数轴）", fontsize=9)
-    ax2.set_xticks([0.1, 1, 10, 100])
-    ax2.set_xticklabels(["0.1", "1", "10", "100"])
-    fs.clean(ax2, grid=True)
-    ax2.set_ylim(-0.66, 1.78)
-    ax2.text(30 * 1.15, 1.0, "30 小时", va="center", ha="left", fontsize=8.4, color=fs.INK)
-    ax2.text(0.1 * 1.2, 0.0, "6 分钟", va="center", ha="left", fontsize=8.4, color=fs.INK)
-    ax2.text(0.048, 1.60, "同一模仿任务，3900 万样本", fontsize=8.0, color=fs.MUTED,
-             ha="left", va="center")
-    ax2.text(0.048, 1.34, "单卡比 16 核 CPU 快 300 倍", fontsize=8.0, color=fs.MUTED,
-             ha="left", va="center")
-    ax2.text(-0.02, 1.03, "(b)", transform=ax2.transAxes, fontsize=9, color=fs.INK,
-             ha="left", va="bottom")
+    fs.arrow(ax, (8.25, 4.55), (6.80, 3.96), color=fs.PURPLE, rad=0.10)
+    fs.label(ax, 9.55, 4.42, "减掉\nbaseline", fs=8.6, color=fs.PURPLE, ha="right", va="top")
 
-    fig.subplots_adjust(left=0.135, right=0.98, top=0.90, bottom=0.20)
+    fs.box(ax, 0.55, 0.45, 4.10, 1.00, "裁剪概率比\n一批数据训十个 epoch", fs=8.6,
+           ec=fs.GREEN, fc="#FFFFFF")
+    fs.box(ax, 5.35, 0.45, 4.10, 1.00, "奖励里加熵\n能完成就多留几种做法", fs=8.6,
+           ec=fs.GREEN, fc="#FFFFFF")
+    fs.label(ax, 2.60, 1.58, "PPO", fs=9.2, color=fs.GREEN, weight="bold")
+    fs.label(ax, 7.40, 1.58, "SAC", fs=9.2, color=fs.GREEN, weight="bold")
+
     fs.save(fig, "ch09", "fig09-02")
 
 
-def fig_gap():
-    """仿真假设、真机实际、常用对策 三列五行。"""
-    fig, ax = fs.canvas(6.9, 4.5)
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 7.0)
+def _smooth(x, k):
+    return np.convolve(x, np.ones(k) / k, mode="valid")
 
-    cA, wA = 0.22, 2.72
-    cB, wB = 3.42, 3.16
-    cC, wC = 7.10, 2.68
-    rows = [
-        ("接触模型", "点接触 + 线性弹簧", "橡胶指尖受力变形，接触面长大", "随机化接触刚度"),
-        ("摩擦", "单一库仑系数", "随速度、湿度变化，静摩擦更大", "随机化摩擦区间"),
-        ("执行器", "理想力矩源或简单 PD", "减速器间隙、齿隙、温升衰减", "辨识后挂执行器网络"),
-        ("传感噪声", "干净信号，少量高斯噪声", "量化、漂移，深度有空洞", "给观测加有结构的噪声"),
-        ("延迟", "默认零延迟", "端到端 10 到 40 ms", "显式延迟 1 到 5 步"),
-    ]
 
-    hy, hh = 6.42, 0.50
-    heads = [(cA, wA, "仿真里的假设", fs.BLUE, "#EFF4FC"),
-             (cB, wB, "真机上发生什么", fs.ACCENT, "#FDF1E6"),
-             (cC, wC, "常用对策", fs.GREEN, "#ECF6F2")]
-    for x, w, text, ec, fc in heads:
-        fs.box(ax, x, hy, w, hh, text, fs=9.0, ec=ec, fc=fc, weight="bold", tc=ec)
+def _qlearn(dense, seed, n=36, episodes=600, alpha=0.15, gamma=0.99,
+            coef=0.02, eps0=0.3, decay=300, maxstep=300, evals=5):
+    """36x36 网格上的表格 Q-learning，返回每个回合结束时贪心策略的成功率。
 
-    for i, (kw, sim, real, fix) in enumerate(rows):
-        y = 5.52 - i * 1.02
-        fs.box(ax, cA, y, wA, 0.84, "", fc="#FFFFFF", ec=fs.FAINT, lw=0.9)
-        ax.text(cA + 0.10, y + 0.56, kw, ha="left", va="center", fontsize=8.6,
-                color=fs.INK, weight="bold")
-        ax.text(cA + 0.10, y + 0.25, sim, ha="left", va="center", fontsize=8.0, color=fs.MUTED)
+    dense=False 只在到达目标时给 +1；dense=True 每步再加一截势能差，
+    势能取负的曼哈顿距离，系数 coef。
+    """
+    rng = np.random.default_rng(seed)
+    goal = (n - 1, n - 1)
+    acts = ((0, 1), (1, 0), (0, -1), (-1, 0))
+    Q = np.zeros((n, n, 4))
+    dist = lambda s: abs(s[0] - goal[0]) + abs(s[1] - goal[1])
+    curve = []
 
-        fs.box(ax, cB, y, wB, 0.84, "", fc="#FFFFFF", ec="#D9C7B8", lw=0.9)
-        ax.text(cB + 0.14, y + 0.42, real, ha="left", va="center", fontsize=8.3, color=fs.INK)
+    for ep in range(episodes):
+        eps = max(0.05, eps0 * (1.0 - ep / decay))
+        s = (int(rng.integers(0, n)), int(rng.integers(0, n)))
+        for _ in range(maxstep):
+            a = int(rng.integers(4)) if rng.random() < eps else int(np.argmax(Q[s[0], s[1]]))
+            dx, dy = acts[a]
+            ns = (min(n - 1, max(0, s[0] + dx)), min(n - 1, max(0, s[1] + dy)))
+            r = 1.0 if ns == goal else 0.0
+            if dense:
+                r += coef * (dist(s) - dist(ns))
+            nxt = 0.0 if ns == goal else np.max(Q[ns[0], ns[1]])
+            Q[s[0], s[1], a] += alpha * (r + gamma * nxt - Q[s[0], s[1], a])
+            s = ns
+            if s == goal:
+                break
 
-        fs.box(ax, cC, y, wC, 0.84, "", fc="#FFFFFF", ec=fs.GREEN, lw=0.9)
-        ax.text(cC + 0.12, y + 0.42, fix, ha="left", va="center", fontsize=8.3, color=fs.GREEN)
+        hit = 0
+        for _ in range(evals):
+            s = (int(rng.integers(0, n)), int(rng.integers(0, n)))
+            for _ in range(maxstep):
+                a = int(np.argmax(Q[s[0], s[1]]))
+                dx, dy = acts[a]
+                s = (min(n - 1, max(0, s[0] + dx)), min(n - 1, max(0, s[1] + dy)))
+                if s == goal:
+                    hit += 1
+                    break
+        curve.append(hit / evals)
+    return np.array(curve)
 
-        fs.arrow(ax, (cA + wA + 0.03, y + 0.42), (cB - 0.04, y + 0.42),
-                 color=fs.ACCENT, lw=0.9, ms=6)
-        fs.arrow(ax, (cB + wB + 0.03, y + 0.42), (cC - 0.04, y + 0.42),
-                 color=fs.GREEN, lw=0.9, ls=(0, (3, 2)), ms=6)
 
-    fy = 0.58
-    fs.arrow(ax, (0.28, fy), (0.66, fy), color=fs.ACCENT, lw=0.9, ms=6)
-    ax.text(0.76, fy, "差距来源", ha="left", va="center", fontsize=8.2, color=fs.MUTED)
-    fs.arrow(ax, (2.24, fy), (2.62, fy), color=fs.GREEN, lw=0.9, ls=(0, (3, 2)), ms=6)
-    ax.text(2.72, fy, "对应补法", ha="left", va="center", fontsize=8.2, color=fs.MUTED)
-    ax.text(4.90, fy, "五处偏差里，延迟最便宜也最容易被漏掉", ha="left", va="center",
-            fontsize=8.2, color=fs.MUTED)
+def fig_reward_curve(seeds=8, k=15):
+    """稀疏奖励与势能塑形奖励的学习曲线（实测）。"""
+    fig, ax = fs.new(6.6, 3.5)
+    fs.clean(ax, grid=True)
+
+    def stat(dense):
+        runs = [_smooth(_qlearn(dense, s), k) for s in range(seeds)]
+        m = np.mean(runs, axis=0)
+        sd = np.std(runs, axis=0)
+        ep = np.arange(len(m)) + k
+        return ep, m, sd
+
+    for dense, name, color in ((True, "稠密奖励（每步给势能差）", fs.GREEN),
+                               (False, "稀疏奖励（成功才给 1）", fs.ACCENT)):
+        ep, m, sd = stat(dense)
+        idx = np.where(m >= 0.5)[0]
+        print("%-4s 达到 50%% 的回合 %s，末值 %.2f" % (
+            name[:2], (idx[0] + k) if len(idx) else None, m[-1]))
+        ax.plot(ep, m, color=color, lw=1.8, label=name, zorder=4)
+        ax.fill_between(ep, np.clip(m - sd, 0, 1.08), np.clip(m + sd, 0, 1.08),
+                        color=color, alpha=0.16, lw=0, zorder=2)
+
+    ax.set_xlim(0, 600)
+    ax.set_ylim(0, 1.20)
+    ax.set_xlabel("训练回合")
+    ax.set_ylabel("贪心策略成功率")
+    ax.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
+    ax.axhline(0.5, color=fs.GRID, lw=1.0, zorder=1)
+    ax.annotate("稠密：15 回合到 0.79", xy=(18, 0.80), xytext=(62, 0.87), fontsize=8.2,
+                color=fs.GREEN, va="center",
+                arrowprops=dict(arrowstyle="-", color=fs.GREEN, lw=0.7))
+    ax.annotate("稀疏：170 回合到 0.50", xy=(170, 0.50), xytext=(196, 0.34), fontsize=8.2,
+                color=fs.ACCENT, va="center",
+                arrowprops=dict(arrowstyle="-", color=fs.ACCENT, lw=0.7))
+    ax.legend(loc="lower right", fontsize=8.6)
+    ax.text(10, 1.16, "36×36 网格，8 个随机种子，阴影为一倍标准差",
+            fontsize=8.2, color=fs.MUTED, va="top")
     fs.save(fig, "ch09", "fig09-03")
 
 
 if __name__ == "__main__":
     fig_loop()
-    fig_speed()
-    fig_gap()
+    fig_families()
+    fig_reward_curve()
