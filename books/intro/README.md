@@ -6,9 +6,9 @@
 
 作者：**Dr. Dezeming**　·　2026 年 · 第一版
 
-[开始阅读](books/intro/chapters/ch01.md)　·　<a href="output/embodied-intro.pdf" target="_blank" rel="noopener">下载 PDF</a>
+[开始阅读](books/intro/chapters/ch01.md)　·　<a href="../../output/embodied-intro.pdf" target="_blank" rel="noopener">下载 PDF</a>
 
-![封面](books/intro/images/cover.jpg)
+![封面](images/cover.jpg)
 
 ## 全书结构
 
@@ -34,4 +34,3 @@
 
 推导与实现细节不在本书范围。逆运动学为什么有多组解、扩散策略的去噪怎么推、VLA 的动作专家怎么接在视觉语言主干后面，这些只给结论和直觉，想往下走顺着附录 B 的论文读原文即可。
 
-[返回系列首页](../../README.md)

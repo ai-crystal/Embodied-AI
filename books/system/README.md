@@ -6,9 +6,9 @@
 
 作者：**Dr. Dezeming**　·　2026 年 · 第一版
 
-[开始阅读](books/system/chapters/ch01.md)　·　<a href="output/embodied-system.pdf" target="_blank" rel="noopener">下载 PDF</a>
+[开始阅读](books/system/chapters/ch01.md)　·　<a href="../../output/embodied-system.pdf" target="_blank" rel="noopener">下载 PDF</a>
 
-![封面](books/system/images/cover.jpg)
+![封面](images/cover.jpg)
 
 ## 全书结构
 
@@ -30,4 +30,3 @@
 - 只做抓取：第 2、4、5、11、16 章。
 - 判断 demo：第 3 章 3.6 节、第 20 章。
 
-[返回系列首页](../../README.md)
