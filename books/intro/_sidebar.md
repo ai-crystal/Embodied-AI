@@ -25,5 +25,3 @@
 - **附录**
   - [附录 A　术语表](/books/intro/appendix/appA.md)
   - [附录 B　延伸阅读](/books/intro/appendix/appB.md)
-
-- <a href="/output/embodied-intro.pdf" target="_blank" rel="noopener" data-router-ignore>下载 PDF</a>

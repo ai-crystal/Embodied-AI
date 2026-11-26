@@ -52,6 +52,9 @@
       maxLevel: 3,
       auto2top: true,
       noCompileLinks: ['output/', '\\.pdf$'],
+      alias: {
+        '/books/([^/]+)/(chapters|front|appendix)/_sidebar.md': '/books/$1/_sidebar.md'
+      },
       search: {
         placeholder: '搜索全书',
         noData: '没有找到内容。',
@@ -73,24 +76,38 @@
       mermaid: { theme: 'default' },
       plugins: [
         function (hook) {
-          hook.doneEach(function () {
+          hook.afterEach(function (html) {
+            var base = location.pathname.replace(/[^\/]*$/, '');
             var route = decodeURI(location.hash.replace(/^#\/?/, '').split('?')[0]);
-            if (!route || /\/$/.test(route)) { route += 'README.md'; }
-            var dir = route.replace(/[^\/]*$/, '');
-            function normalize(p) {
-              var stack = dir.split('/').filter(Boolean);
-              p.split('/').forEach(function (seg) {
-                if (seg === '..') { stack.pop(); }
-                else if (seg !== '.' && seg !== '') { stack.push(seg); }
-              });
-              return '/' + stack.join('/');
+            var m = route.match(/books\/([^\/]+)\/chapters\/ch(\d+)/);
+            if (m) {
+              html = html.replace(/(src=")\.\.\/images\/(\d+)\//g,
+                '$1' + base + 'books/' + m[1] + '/images/$2/');
             }
+            html = html.replace(/(href=")(?:\.\.\/)+output\//g, '$1' + base + 'output/');
+            return html;
+          });
+
+          hook.doneEach(function () {
+            // 站点可能挂在 /<repo>/ 子路径下（GitHub Pages 项目页），路径一律以站点根为基准拼
+            var base = location.pathname.replace(/[^\/]*$/, '');
+            var route = decodeURI(location.hash.replace(/^#\/?/, '').split('?')[0]);
+            var m = route.match(/books\/([^\/]+)\/chapters\/ch(\d+)/);
+
             document.querySelectorAll('.markdown-section img').forEach(function (img) {
               var src = img.getAttribute('src') || '';
-              if (src && !/^(https?:|\/|data:)/.test(src)) {
-                img.setAttribute('src', normalize(src));
+              if (/^(https?:|data:)/.test(src)) { return; }
+              var name = src.split('/').pop();
+              if (m) {
+                img.setAttribute('src', base + 'books/' + m[1] + '/images/' + m[2] + '/' + name);
               }
             });
+
+            document.querySelectorAll('.markdown-section a[href$=".pdf"]').forEach(function (a) {
+              var name = (a.getAttribute('href') || '').split('/').pop();
+              if (name) { a.setAttribute('href', base + 'output/' + name); }
+            });
+
             if (window.renderMathInElement) {
               window.renderMathInElement(document.querySelector('.markdown-section'), {
                 delimiters: [

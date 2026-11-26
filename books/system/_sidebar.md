@@ -30,5 +30,3 @@
   - [附录 B　术语中英对照](/books/system/appendix/appB.md)
   - [附录 C　参考文献与延伸阅读](/books/system/appendix/appC.md)
   - [附录 D　工具链速查](/books/system/appendix/appD.md)
-
-- <a href="/output/embodied-system.pdf" target="_blank" rel="noopener" data-router-ignore>下载 PDF</a>

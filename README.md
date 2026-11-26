@@ -14,8 +14,8 @@
 
 | 册 | 书名 | 一句话 | 页数 | 在线阅读 | PDF |
 | --- | --- | --- | ---: | --- | --- |
-| 01 | [入门篇](books/intro/README.md) | 从零开始，看懂机器怎么动手 | 156 | [阅读](books/intro/README.md) | <a href="output/embodied-intro.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
-| 02 | [系统篇](books/system/README.md) | 从大模型到机器人：感知、学习与行动 | 205 | [阅读](books/system/README.md) | <a href="output/embodied-system.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
+| 01 | [入门篇](books/intro/README.md) | 从零开始，看懂机器怎么动手 | 156 | [阅读](books/intro/README.md) | <a href="output/v1-intro.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
+| 02 | [系统篇](books/system/README.md) | 从大模型到机器人：感知、学习与行动 | 205 | [阅读](books/system/README.md) | <a href="output/v2-system.pdf" target="_blank" rel="noopener" data-router-ignore>下载</a> |
 
 ## 怎么读
 

@@ -86,6 +86,6 @@ exit /b 1
 
 :done
 echo.
-echo done. output\embodied-intro.pdf  output\embodied-system.pdf
+echo done. output\v1-intro.pdf  output\v2-system.pdf
 pause
 exit /b 0
